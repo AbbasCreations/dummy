@@ -10,207 +10,394 @@
 
     <title>Surprise for you</title>
     <style>
-        body{width:100%;height:100%;background:#222;
-  font-family:helvetica;
-  font-weight:light;
-  text-align:center;
-}
-      .card{background:transparent!important;background-color:transparent!important;}
-section {
-  width:200px;
-  height:200px;
-  margin:0 auto;
-background:#fff;
-  margin-top:50px;
+    body {
+  background: #eeeeee;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
 }
 
-section > p {
-  color:#bbb;
-  letter-spacing:1px;
-  text-transform:uppercase;
-  background:#555;
-  margin-bottom:100px;
-  border-radius:5px;
-  height:30px;
-  line-height:30px;
-  cursor:pointer;
+.lever-1 .lever-container-1,
+.lever-1 .lever-container-2,
+.lever-2 .lever-container-1,
+.lever-2 .lever-container-2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 18px;
+  cursor: pointer;
+  z-index: 10;
+}
+.lever-1 .lever-container-1 .lever-contents-1,
+.lever-1 .lever-container-1 .lever-contents-2,
+.lever-1 .lever-container-2 .lever-contents-1,
+.lever-1 .lever-container-2 .lever-contents-2,
+.lever-2 .lever-container-1 .lever-contents-1,
+.lever-2 .lever-container-1 .lever-contents-2,
+.lever-2 .lever-container-2 .lever-contents-1,
+.lever-2 .lever-container-2 .lever-contents-2 {
+  height: 100%;
+  width: 3px;
+  background-color: black;
+  z-index: 10;
+}
+.lever-1 .lever-container-1 .lever-contents-1:before, .lever-1 .lever-container-1 .lever-contents-1:after,
+.lever-1 .lever-container-1 .lever-contents-2:before,
+.lever-1 .lever-container-1 .lever-contents-2:after,
+.lever-1 .lever-container-2 .lever-contents-1:before,
+.lever-1 .lever-container-2 .lever-contents-1:after,
+.lever-1 .lever-container-2 .lever-contents-2:before,
+.lever-1 .lever-container-2 .lever-contents-2:after,
+.lever-2 .lever-container-1 .lever-contents-1:before,
+.lever-2 .lever-container-1 .lever-contents-1:after,
+.lever-2 .lever-container-1 .lever-contents-2:before,
+.lever-2 .lever-container-1 .lever-contents-2:after,
+.lever-2 .lever-container-2 .lever-contents-1:before,
+.lever-2 .lever-container-2 .lever-contents-1:after,
+.lever-2 .lever-container-2 .lever-contents-2:before,
+.lever-2 .lever-container-2 .lever-contents-2:after {
+  position: absolute;
+  content: "";
+  left: 0px;
+  width: 18px;
+  height: 18px;
+  background-color: black;
+  border-radius: 50%;
+}
+.lever-1 .lever-container-1 .lever-contents-1:before,
+.lever-1 .lever-container-1 .lever-contents-2:before,
+.lever-1 .lever-container-2 .lever-contents-1:before,
+.lever-1 .lever-container-2 .lever-contents-2:before,
+.lever-2 .lever-container-1 .lever-contents-1:before,
+.lever-2 .lever-container-1 .lever-contents-2:before,
+.lever-2 .lever-container-2 .lever-contents-1:before,
+.lever-2 .lever-container-2 .lever-contents-2:before {
+  bottom: -15px;
+}
+.lever-1 .lever-container-1 .lever-contents-1:after,
+.lever-1 .lever-container-1 .lever-contents-2:after,
+.lever-1 .lever-container-2 .lever-contents-1:after,
+.lever-1 .lever-container-2 .lever-contents-2:after,
+.lever-2 .lever-container-1 .lever-contents-1:after,
+.lever-2 .lever-container-1 .lever-contents-2:after,
+.lever-2 .lever-container-2 .lever-contents-1:after,
+.lever-2 .lever-container-2 .lever-contents-2:after {
+  bottom: -30px;
 }
 
-p:hover {color:#72CCA7;}
-
-ul {
-  color: #10A296;
-  text-align:center;
-  height:200px;
-  line-height:200px;
-  cursor:pointer;
-  display:block;
-  position:absolute;
-  backface-visibility:hidden;
-  -webkit-backface-visibility:hidden;
-  padding:0px 15px;
-  margin:0px auto;
-  margin-top:220px;
+#inp-lever-1 {
+  display: none;
+}
+#inp-lever-1:checked ~ .lever-1 .lever-container-1 {
+  height: 70vh;
+}
+#inp-lever-1:checked ~ ul .blinds {
+  height: 1px;
 }
 
-li {
-  margin:0 auto;
-  width:0px;
-  height:0px;
-  list-style:none;
-  position:absolute;
+.lever-1 .lever-container-1 {
+  height: 40vh;
+  right: 14%;
+  transition: height 500ms ease;
+}
+.lever-1 .lever-container-1 .lever-contents-1 {
+  box-shadow: 15px 15px 5px rgba(0, 0, 0, 0.3);
+}
+.lever-1 .lever-container-1 .lever-contents-1:before, .lever-1 .lever-container-1 .lever-contents-1:after {
+  box-shadow: 15px 15px 5px rgba(0, 0, 0, 0.3);
 }
 
-#up {
-  top:0;
-  left:0;
-  border-top:100px solid rgb(170, 16, 16);
-  border-right:100px solid transparent;
-  border-left:100px solid transparent;
+#inp-lever-2 {
+  display: none;
+}
+#inp-lever-2:checked ~ .lever-2 .lever-container-2 {
+  transform: rotate3d(0, 1, 0, 180deg);
+}
+#inp-lever-2:checked ~ .lever-2 .lever-shadow-container {
+  transform: rotate3d(0, 1, 0, 180deg);
+}
+#inp-lever-2:checked ~ ul .blinds {
+  transform: rotateX(80deg);
 }
 
-#r {
-  top:0;
-  left:100px;
-  border-right: 100px solid rgb(170, 16, 16);
-  border-top: 100px solid transparent;
-  border-bottom: 100px solid transparent;
+.lever-2 .lever-container-2 {
+  transition: transform 500ms ease;
+  height: 60vh;
+  right: 10%;
 }
 
-#dn {
-  top:100px;
-  left:0;
-  border-bottom: 100px solid rgb(170, 16, 16);
-  border-left: 100px solid transparent;
-  border-right: 100px solid transparent;
+.lever-shadow-container {
+  top: 15px;
+  pointer-events: none;
+  transition: transform 500ms ease;
+  height: 60vh;
+  right: calc(10% - 15px);
+  filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 18px;
+  cursor: pointer;
+  z-index: 10;
+}
+.lever-shadow-container .lever-shadow-contents {
+  height: 100%;
+  width: 3px;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+.lever-shadow-container .lever-shadow-contents:before, .lever-shadow-container .lever-shadow-contents:after {
+  position: absolute;
+  content: "";
+  left: 0px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.lever-shadow-container .lever-shadow-contents:before {
+  bottom: -15px;
+}
+.lever-shadow-container .lever-shadow-contents:after {
+  bottom: -30px;
 }
 
-#l {
-  top:0;
-  left:0;
-  border-left: 100px solid rgb(170, 16, 16);
-  border-top: 100px solid transparent;
-  border-bottom: 100px solid transparent;
+.blinds-container {
+  position: relative;
+  width: 600px;
+  display: flex;
+  justify-content: center;
+}
+.blinds-container ul {
+  padding: 0;
+  display: grid;
+  grid-column-gap: 10px;
+  grid-template-columns: 100px 100px 100px 100px 100px;
+}
+.blinds-container ul li {
+  list-style: none;
+  width: 100%;
+  height: 15px;
+  background-color: #a13d2d;
+  transform: skew(15deg);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  transition: transform 500ms ease, height 1000ms ease;
+  z-index: 1;
 }
 
-.flip #up {
-  animation: popUp 0.5s ease-in 0s forwards;
-  -webkit-animation: popUp 0.5s ease-in 0s forwards;
-}
-.flip #r {
-  animation: popRight 0.5s ease-in 0.2s forwards;
-  -webkit-animation: popRight 0.5s ease-in 0.2s forwards;
-}
-.flip #dn {
-  animation: popDn 0.5s ease-in 0.4s forwards;
-  -webkit-animation: popDn 0.5s ease-in 0.4s forwards;
-}
-.flip #l {
-  animation: popLeft 0.5s ease-in 0.6s forwards;
-  -webkit-animation: popLeft 0.5s ease-in 0.6s forwards;
+.upper-box {
+  position: absolute;
+  height: 20px;
+  width: 600px;
+  background-color: black;
+  z-index: 20;
+  box-shadow: 15px 15px 5px rgba(0, 0, 0, 0.3);
 }
 
+.under-box {
+  position: absolute;
+  height: 20px;
+  width: 600px;
+  background-color: black;
+  z-index: 1;
+}
 
-@-webkit-keyframes popUp {
-  0% {
-    -webkit-transform-origin: top;
-    -webkit-transform: translate(0px,0px) scale(1) rotateX(0deg);
+.windows-container {
+  top: 0;
+  z-index: 0;
+  position: absolute;
+  width: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  padding-top: 10px;
+  background-color: #cca19a;
+}
+.windows-container .windows {
+  padding-top: 11px;
+  text-align: center;
+  display: grid;
+  grid-column-gap: 0px;
+  grid-template-columns: repeat(5, minmax(110px, 0fr));
+  height: 4%;
+}
+.windows-container .windows > * {
+  border: 10px solid #a13d2d70;
+  height: 280px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  line-height: 30px;
+  font-size: 18.5px;
+  font-weight: bold;
+  color: #a13d2d;
+}
+
+body {
+  background-color: #cca19a;
+}
+
+.lever-container-1 {
+  animation: auto-1 5s infinite;
+}
+
+@keyframes auto-1 {
+  50% {
+    transform: translateY(10px);
   }
   100% {
-    -webkit-transform-origin: top;
-    -webkit-transform: translate(0px,0px) scale(1) rotateX(-180deg);
-  }
-}
-
-@-webkit-keyframes popRight {
-  0% {
-    -webkit-transform-origin: right;
-    -webkit-transform: translate(0px,0px) scale(1) rotateY(0deg);
-  }
-  100% {
-    -webkit-transform-origin: right;
-    -webkit-transform: translate(0px,0px) scale(1) rotateY(-180deg);
-  }
-}
-
-@-webkit-keyframes popDn {
-  0% {
-    -webkit-transform-origin: bottom;
-    -webkit-transform: translate(0px,0px) scale(1) rotateX(0deg);
-  }
-  100% {
-    -webkit-transform-origin: bottom;
-    -webkit-transform: translate(0px,0px) scale(1) rotateX(-180deg);
-  }
-}
-
-@-webkit-keyframes popLeft {
-  0% {
-    -webkit-transform-origin: left;
-    -webkit-transform: translate(0px,0px) scale(1) rotateY(0deg);
-  }
-  100% {
-    -webkit-transform-origin: left;
-    -webkit-transform: translate(0px,0px) scale(1) rotateY(-180deg);
-  }
-}
-
-
-@keyframes popUp {
-  0% {
-    transform-origin: top;
-    transform: translate(0px,0px) scale(1) rotateX(0deg);
-  }
-  100% {
-    transform-origin: top;
-    transform: translate(0px,0px) scale(1) rotateX(-180deg);
-  }
-}
-
-@keyframes popRight {
-  0% {
-    transform-origin: right;
-    transform: translate(0px,0px) scale(1) rotateY(0deg);
-  }
-  100% {
-    transform-origin: right;
-    transform: translate(0px,0px) scale(1) rotateY(-180deg);
-  }
-}
-
-@keyframes popDn {
-  0% {
-    transform-origin: bottom;
-    transform: translate(0px,0px) scale(1) rotateX(0deg);
-  }
-  100% {
-    transform-origin: bottom;
-    transform: translate(0px,0px) scale(1) rotateX(-180deg);
-  }
-}
-
-@keyframes popLeft {
-  0% {
-    transform-origin: left;
-    transform: translate(0px,0px) scale(1) rotateY(0deg);
-  }
-  100% {
-    transform-origin: left;
-    transform: translate(0px,0px) scale(1) rotateY(-180deg);
+    transform: translateY(0px);
   }
 }
     </style>
   </head>
   <body>
-    <section class="card">
-        <p> click me to open </p>
-        <ul class="front">I LOVE YOU FATIMA :*
-          <li id="up"></li>
-          <li id="r"></li>
-          <li id="dn"></li>
-          <li id="l"></li>
-        </ul>
-      </section>
+      <div class="blinds-container">
+     <input id="inp-lever-1" type="checkbox">
+     <label class="lever-1" for="inp-lever-1">
+       <div class="lever-container-1 ">
+         <div class="lever-contents-1 "></div>
+       </div>
+     </label>
+     <input id="inp-lever-2" type="checkbox">
+     <label class="lever-2" for="inp-lever-2">
+       <div class="lever-container-2 disable">
+         <div class="lever-contents-2 disable"></div>
+       </div>
+       <div class="lever-shadow-container disable">
+         <div class="lever-shadow-contents disable"></div>
+       </div>
+
+     </label>
+     <div class="upper-box"></div>
+     <div class="under-box"></div>
+
+     <ul>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+       <li class="blinds"></li>
+     </ul>
+     <div class="windows-container">
+       <div class="windows">
+         <div>I<br>I<br>I</div>
+         <div>LOVE<br>MISS<br>WANT</div>
+         <div>YOU<br>YOU<br>YOU</div>
+         <div>FATIMA<br>FATIMA<br>FATIMA</div>
+         <div>!<br>!<br>!</div>
+       </div>
+     </div>
+
+   </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
