@@ -10,211 +10,171 @@
     <title>Surprise for you</title>
     <style>
 
-	@import url(https://fonts.googleapis.com/css?family=Monoton|Caveat|);
-	
-	@-webkit-keyframes turnonlights {
-	     0%        { color: #6d5669; text-shadow: 0 0 3px #38eeff, 0 0 2px #38eeff; }
-		1%        { color: #ff55de; text-shadow: 0 0 5px #38eeff, 0 0 1px #38eeff, 0 0 17px #ff00de, 0 0 38px #ff00de}
-		4%        { color: #ff55de; text-shadow: 0 0 5px #38eeff, 0 0 1px #38eeff, 0 0 17px #ff00de, 0 0 38px #ff00de}
-		7%        { color: #6d5669; text-shadow: 0 0 3px #38eeff, 0 0 2px #38eeff; }
-		8%        { color: #ff55de; text-shadow: 0 0 5px #38eeff, 0 0 1px #38eeff, 0 0 17px #ff00de, 0 0 38px #ff00de}
-		12%        { color: #6d5669; text-shadow: 0 0 3px #38eeff, 0 0 5px #38eeff; }
-		22%        { color: #6d5669; text-shadow: 0 0 3px #38eeff, 0 0 5px #38eeff; }
-		  34%        { color: #ff55de; text-shadow: 0 0 5px #38eeff, 0 0 10px #38eeff, 0 0 15px #38eeff, 0 0 20px #ff00de, 0 0 30px #ff00de, 0 0 40px #ff00de; }
-		36%        { color: #6d5669; text-shadow: 0 0 3px #38eeff, 0 0 5px #38eeff; }
-		42%        { color: #ff55de; text-shadow: 0 0 5px #38eeff, 0 0 10px #38eeff, 0 0 17px #ff00de, 0 0 38px #ff00de}
-		55%        { color: #ff55de; text-shadow: 0 0 5px #38eeff, 0 0 10px #38eeff, 0 0 15px #38eeff, 0 0 20px #ff00de, 0 0 30px #ff00de, 0 0 40px #ff00de; }
-		60%        { color: #6d5669; text-shadow: 0 0 3px #38eeff, 0 0 5px #38eeff; }
-		63%        { color: #ff55de; text-shadow: 0 0 5px #38eeff, 0 0 10px #38eeff, 0 0 15px #38eeff, 0 0 20px #ff00de, 0 0 30px #ff00de, 0 0 40px #ff00de; }
-		67%        { color: #6d5669; text-shadow: 0 0 3px #38eeff, 0 0 5px #38eeff; }
-		  84%        { color: #ff55de; text-shadow: 0 0 5px #38eeff, 0 0 10px #38eeff, 0 0 15px #38eeff, 0 0 20px #ff00de, 0 0 30px #ff00de, 0 0 40px #ff00de; }
-		86%        { color: #6d5669; text-shadow: 0 0 3px #38eeff, 0 0 5px #38eeff; }
-		96%    { color: #ff55de; text-shadow: 0 0 5px #38eeff, 0 0 10px #38eeff, 0 0 17px #ff00de, 0 0 38px #ff00de}
-		100%    {  text-shadow: 2px 2px 15px rgba(0,0,0,0.9), 10px 0px 50px 
-	 #b30059, 0 0 10px #38eeff, 0 0 50px #38eeff;
-	  color:#b30059;
-	 }
-		}
-		
-	@-moz-keyframes turnonlights {
-		0%        { color: #6d5669; text-shadow: 0 0 3px #38eeff, 0 0 2px #38eeff; }
-		1%        { color: #ff55de; text-shadow: 0 0 5px #38eeff, 0 0 1px #38eeff, 0 0 17px #ff00de, 0 0 38px #ff00de}
-		4%        { color: #ff55de; text-shadow: 0 0 5px #38eeff, 0 0 1px #38eeff, 0 0 17px #ff00de, 0 0 38px #ff00de}
-		7%        { color: #6d5669; text-shadow: 0 0 3px #38eeff, 0 0 2px #38eeff; }
-		8%        { color: #ff55de; text-shadow: 0 0 5px #38eeff, 0 0 1px #38eeff, 0 0 17px #ff00de, 0 0 38px #ff00de}
-		12%        { color: #6d5669; text-shadow: 0 0 3px #38eeff, 0 0 5px #38eeff; }
-		22%        { color: #6d5669; text-shadow: 0 0 3px #38eeff, 0 0 5px #38eeff; }
-		  34%        { color: #ff55de; text-shadow: 0 0 5px #38eeff, 0 0 10px #38eeff, 0 0 15px #38eeff, 0 0 20px #ff00de, 0 0 30px #ff00de, 0 0 40px #ff00de; }
-		36%        { color: #6d5669; text-shadow: 0 0 3px #38eeff, 0 0 5px #38eeff; }
-		42%        { color: #ff55de; text-shadow: 0 0 5px #38eeff, 0 0 10px #38eeff, 0 0 17px #ff00de, 0 0 38px #ff00de}
-		55%        { color: #ff55de; text-shadow: 0 0 5px #38eeff, 0 0 10px #38eeff, 0 0 15px #38eeff, 0 0 20px #ff00de, 0 0 30px #ff00de, 0 0 40px #ff00de; }
-		60%        { color: #6d5669; text-shadow: 0 0 3px #38eeff, 0 0 5px #38eeff; }
-		63%        { color: #ff55de; text-shadow: 0 0 5px #38eeff, 0 0 10px #38eeff, 0 0 15px #38eeff, 0 0 20px #ff00de, 0 0 30px #ff00de, 0 0 40px #ff00de; }
-		67%        { color: #6d5669; text-shadow: 0 0 3px #38eeff, 0 0 5px #38eeff; }
-		  84%        { color: #ff55de; text-shadow: 0 0 5px #38eeff, 0 0 10px #38eeff, 0 0 15px #38eeff, 0 0 20px #ff00de, 0 0 30px #ff00de, 0 0 40px #ff00de; }
-		86%        { color: #6d5669; text-shadow: 0 0 3px #38eeff, 0 0 5px #38eeff; }
-		96%    { color: #ff55de; text-shadow: 0 0 5px #38eeff, 0 0 10px #38eeff, 0 0 17px #ff00de, 0 0 38px #ff00de}
-		100%    {  text-shadow: 2px 2px 15px rgba(0,0,0,0.3), 0 0px 15px 
-	 #b30059, 0 0 10px #38eeff, 0 0 50px #38eeff;
-	  color:#b30059;
-	 }
+/*Basics*/
+* {
+  margin: 0;
 }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  cursor: none;
+}
+
+body {
+  overflow: hidden;
   
-
-
-	body {
-
-   
-background-color:#111;
-
-	   font-family: 'Caveat', Helvetica, Arial, sans-serif;
-	}
-
-	.content #switch {
-		padding-left:45%;
-
-	
-		font-size: 32px;
-		letter-spacing:01 em;
-	font-family:'Caveat';
-	cursor:pointer;
-	  text-align: center;
-	  color: #b30059;
-	 
-	}
-	.content {
-		position: center;
-	 
-    
-	
-		
-		
-	}
-#lights{
-  font-size:100px;
-  text-align:center;
-  color:#000;
 }
 
-	#trav{
-		font-family: 'Monoton', cursive;
-		 -webkit-animation: blink 0.1s infinite alternate;
-	  -moz-animation: blink 0.1s infinite alternate;
-	  -o-animation: blink 0.1s infinite alternate;
-	  animation: blink 0.1s infinite alternate;
-	}
-	#fade {
-		font-family: 'Monoton', cursive;
-	  
-	  opacity: 0.7;
-	  
-	  
-	  -webkit-animation: fade 0.1s infinite reverse;
-	  -moz-animation: fade 0.1s infinite reverse;
-	  -o-animation: fade 0.1s infinite reverse;
-	  animation: fade 0.1s infinite reverse;
-	}
-	  @-webkit-keyframes blink {
-	  45% {
-		opacity: 0.5;
-	  }
-	  }	
-	@-o-keyframes blink {
-	  70% {
-		opacity: 0.7;
-	  }
-	}
-	@keyframes blink {
-	  70% {
-		opacity: 0.7;
-	  }
-	}
-	@-moz-keyframes fade {
-	  40% {
-		opacity: 0.8;
-	  }
-	  42% {
-		opacity: 0.1;
-	  }
-	  43% {
-		opacity: 0.8;
-	  }
-	  45% {
-		opacity: 0.1;
-	  }
-	  46% {
-		opacity: 0.8;
-	  }
-	}
-	@-webkit-keyframes fade {
-	  40% {
-		opacity: 0.8;
-	  }
-	  42% {
-		opacity: 0.1;
-	  }
-	  43% {
-		opacity: 0.8;
-	  }
-	  45% {
-		opacity: 0.1;
-	  }
-	  46% {
-		opacity: 0.8;
-	  }
-	}
-	@-o-keyframes fade {
-	  40% {
-		opacity: 0.8;
-	  }
-	  42% {
-		opacity: 0.1;
-	  }
-	  43% {
-		opacity: 0.8;
-	  }
-	  45% {
-		opacity: 0.1;
-	  }
-	  46% {
-		opacity: 0.8;
-	  }
-	}
-	@keyframes fade {
-	  40% {
-		opacity: 0.8;
-	  }
-	  42% {
-		opacity: 0.1;
-	  }
-	  43% {
-		opacity: 0.8;
-	  }
-	  45% {
-		opacity: 0.1;
-	  }
-	  46% {
-		opacity: 0.8;
-	  }
-	}
-	.animate {
-		text-align: center;
-		
-		
-	 font-family: 'Caveat', Helvetica, Arial, sans-serif;
-	   
-		font-size: 100px;
-		-webkit-animation-name: turnonlights;
-		-webkit-animation-duration: 3.0s;
-	  -webkit-animation-fill-mode: both;
-		-webkit-animation-timing-function: steps(2, start);
-		-moz-animation-name: turnonlights;
-		-moz-animation-duration: 3.0s;
-		-moz-animation-fill-mode: both;
-		-moz-animation-timing-function: steps(2, start);      
-	 
-	  
-	}
+input {
+  display: none;
+}
+
+/*Circle and hearts*/
+.circle {
+  background: #EF476F;
+  border-radius: 50%;
+  left: calc(50% - 10px);
+  top: 252px;
+  transition: all .5s cubic-bezier(0.22, 0.53, 0.37, 1.41);
+}
+
+.hearts, .hearts:before, .hearts:after, .circle {
+  display: block;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+}
+
+.hearts {
+  transform: rotate(-45deg);
+}
+
+.hearts:before, .hearts:after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: inherit;
+}
+
+.hearts:before {
+  left: 12px;
+}
+
+.hearts:after {
+  top: -12px;
+}
+
+#heart {
+  background: #D33F49;
+  z-index: 2;
+  pointer-events: none;
+}
+
+#heartholder {
+  top: 255px;
+  left: calc(50% - 10px);
+  cursor: none;
+  z-index: 1;
+  background: #f697e1;
+  transition: all .2s ease-in;
+}
+
+/*Transform heart into key*/
+#heartholder:hover {
+  background: #ad6a9e;
+}
+
+#heartholder:hover ~ #heart{
+  width: 7px;
+  height: 27px;
+  background: #ffcf0d;
+}
+
+
+#heartholder:hover ~ #heart:after {
+  left: -7px;
+  top: -19px;
+  width: 12px;
+  height: 12px;
+  background: transparent;
+  border: 5px #ffcf0d solid;
+}
+
+#heartholder:hover ~ #heart:before {
+  border-radius: 0;
+  top: 12px;
+  left: 0;
+  border-color: #ffcf0d;
+  border-width: 4px;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  background: transparent;
+  height: 9px;
+}
+
+/*Make the circle appear*/
+#heartInput:checked ~ .circle {
+  width: 400px;
+  height: 400px;
+  left: calc(50% - 200px);
+  top: 50px;
+}
+
+/*Message to the loved one*/
+.message, label.lang {
+  font-family: 'Cabin', sans-serif;
+}
+
+.message {
+  position: absolute;
+  width: 300px;
+  color: white;
+  font-size: 18px;
+  text-align: center;
+  margin: 0 auto;
+  line-height: 1.5;
+  top: 150px;
+  left: calc(50% - 150px);
+  opacity: 0;
+}
+
+.message p:first-child {
+  margin-bottom: 70px;
+}
+
+.love {
+  font-family: 'Lobster', cursive;
+  font-size: 30px;
+}
+
+/*Change language*/
+
+label.lang {
+  margin-right: 15px;
+  display: block;
+  float: right;
+  color: #aaa;
+  padding: 15px 5px;
+  position: relative;
+  z-index: 5;
+  cursor: pointer;
+}
+
+input[type="radio"]:checked + label, label.lang:hover { 
+  font-weight: bold; 
+  text-decoration: underline;
+  color: #383838;
+} 
+
+#checkENG:checked ~ .message.eng {
+  opacity: 1;
+}
+
+#checkFR:checked ~ .message.fr {
+  opacity: 1;
+}
 
 
  </style>
@@ -222,18 +182,23 @@ background-color:#111;
   <body>
 
 
-<link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet" type="text/css"/>
-    <div class="bg"></div>
-    <div class="content">
-    <span id="switch">Click Me Bono</span></div>
-    <div id="lights">I <br>
-	 <span id="fade">Love </span>
-	 You<br >
-	 <span id ="trav">For</span>
-	 ever</div>
+<input type="checkbox" id="heartInput">
+<label for="heartInput" class="hearts" id="heartholder"></label>
+<span class="hearts" id="heart"></span>
+<span class="circle"></span>
 
+<input type="radio" id="checkFR" name="language">
+<label class="lang" for="checkFR">Fr</label>
+<input type="radio" checked="checked" id="checkENG" name="language">
+<label class="lang" for="checkENG">Eng</label>
+  
  
-        <script src="js/index.js"></script>
+
+
+<div class="message eng">
+  <p> To the one who delights me by her cuteness , the one who transforms a day at her side into a wonderful gift.</p>
+  <p class="love"> I love you Meri bonito <3 </p>
+</div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -242,17 +207,16 @@ background-color:#111;
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/mojs/latest/mo.min.js"></script>  
     <script>
-var toggle = document.getElementById('switch');
-toggle.onclick = function() {
-  this.innerText='Meri Kako';
- this.style.cursor='none';
-      this.style.color='#bef'; 
-           document.getElementById('lights').className = 'animate';
-document.getElementById('switch').className = 'animate';
-	document.getElementById('trav').style.color='#ccf';
+var heart= document.getElementById('heart'),
+    heartW = heart.offsetWidth,
+    heartH = heart.offsetHeight;
 
-
-};
+document.body.onmousemove = function( event ) {
+  var x = event.clientX - (heartW / 2);
+  var y = event.clientY  - (heartH / 2);
+  
+  heart.style.transform = "translate("+ x +"px, "+ y +"px) rotate(-45deg)"
+}
 
     </script>
 </body>
