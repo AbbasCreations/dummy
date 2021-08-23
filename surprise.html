@@ -5,218 +5,163 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-    <!-- Bootstrap CSS -->
-    
+    <!-- Bootstrap CSS -->    
     <title>Surprise for you</title>
-    <style>
+<style>
+  css-doodle {
+    --color: @p(#ff496c, #fffde1, #ff9d76, #E30022);
+    --rule: (
+      :doodle {
+        @grid: 30x1 / 18vmin;
+        --deg: @p(-180deg, 180deg);
+      }
+      :container {
+        perspective: 30vmin;
+      }
+      :after, :before {
+        content: '';
+        background: var(--color); 
+        @place-cell: @r(100%) @r(100%);
+        @size: @r(6px);
+        @shape: heart;
+      }
+    
+      @place-cell: center;
+      @size: 100%;
+    
+      box-shadow: @m2(0 0 50px var(--color));
+      background: @m100(
+        radial-gradient(var(--color) 50%, transparent 0) 
+        @r(-20%, 120%) @r(-20%, 100%) / 1px 1px
+        no-repeat
+      );
+    
+      will-change: transform, opacity;
+      animation: scale-up 12s linear infinite;
+      animation-delay: calc(-12s / @I * @i);
 
-/*Basics*/
-* {
+      @keyframes scale-up {
+        0%, 95.01%, 100% {
+          transform: translateZ(0) rotate(0);
+          opacity: 0;
+        }
+        10% { 
+          opacity: 1; 
+        }
+        95% {
+          transform: 
+            translateZ(35vmin) rotateZ(@var(--deg));
+        }
+      }
+    )
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+html, body { 
+  width: 100%;
+  height: 100%; 
   margin: 0;
+  background: #270F34; 
+  overflow: hidden; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  contain: content;
+  overflow: clip;
 }
-
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  cursor: none;
-}
-
-body {
-  overflow: hidden;
+p{position:absolute;top:40%;transform:translateY(-50%);
+color:#fff;font-size:20px;font-weight:500;font-family: 'Lobster', cursive;Text-transform:uppercase;}
+.G1 {
+            transform: translate(20px, 85px) rotate(-30deg);
+        }
   
-}
-
-input {
-  display: none;
-}
-
-/*Circle and hearts*/
-.circle {
-  background: #EF476F;
-  border-radius: 50%;
-  left: calc(50% - 10px);
-  top: 252px;
-  transition: all .5s cubic-bezier(0.22, 0.53, 0.37, 1.41);
-}
-
-.hearts, .hearts:before, .hearts:after, .circle {
-  display: block;
-  width: 20px;
-  height: 20px;
-  position: absolute;
-}
-
-.hearts {
-  transform: rotate(-45deg);
-}
-
-.hearts:before, .hearts:after {
-  content: '';
-  position: absolute;
-  border-radius: 50%;
-  background: inherit;
-}
-
-.hearts:before {
-  left: 12px;
-}
-
-.hearts:after {
-  top: -12px;
-}
-
-#heart {
-  background: #D33F49;
-  z-index: 2;
-  pointer-events: none;
-}
-
-#heartholder {
-  top: 255px;
-  left: calc(50% - 10px);
-  cursor: none;
-  z-index: 1;
-  background: #f697e1;
-  transition: all .2s ease-in;
-}
-
-/*Transform heart into key*/
-#heartholder:hover {
-  background: #ad6a9e;
-}
-
-#heartholder:hover ~ #heart{
-  width: 7px;
-  height: 27px;
-  background: #ffcf0d;
-}
-
-
-#heartholder:hover ~ #heart:after {
-  left: -7px;
-  top: -19px;
-  width: 12px;
-  height: 12px;
-  background: transparent;
-  border: 5px #ffcf0d solid;
-}
-
-#heartholder:hover ~ #heart:before {
-  border-radius: 0;
-  top: 12px;
-  left: 0;
-  border-color: #ffcf0d;
-  border-width: 4px;
-  border-top-style: solid;
-  border-bottom-style: solid;
-  background: transparent;
-  height: 9px;
-}
-
-/*Make the circle appear*/
-#heartInput:checked ~ .circle {
-  width: 400px;
-  height: 400px;
-  left: calc(50% - 200px);
-  top: 50px;
-}
-
-/*Message to the loved one*/
-.message, label.lang {
-  font-family: 'Cabin', sans-serif;
-}
-
-.message {
-  position: absolute;
-  width: 300px;
-  color: white;
-  font-size: 18px;
-  text-align: center;
-  margin: 0 auto;
-  line-height: 1.5;
-  top: 150px;
-  left: calc(50% - 150px);
-  opacity: 0;
-}
-
-.message p:first-child {
-  margin-bottom: 70px;
-}
-
-.love {
-  font-family: 'Lobster', cursive;
-  font-size: 30px;
-}
-
-/*Change language*/
-
-label.lang {
-  margin-right: 15px;
-  display: block;
-  float: right;
-  color: #aaa;
-  padding: 15px 5px;
-  position: relative;
-  z-index: 5;
-  cursor: pointer;
-}
-
-input[type="radio"]:checked + label, label.lang:hover { 
-  font-weight: bold; 
-  text-decoration: underline;
-  color: #383838;
-} 
-
-#checkENG:checked ~ .message.eng {
-  opacity: 1;
-}
-
-#checkFR:checked ~ .message.fr {
-  opacity: 1;
-}
-
-
- </style>
-  </head>
-  <body>
-
-
-<input type="checkbox" id="heartInput">
-<label for="heartInput" class="hearts" id="heartholder"></label>
-<span class="hearts" id="heart"></span>
-<span class="circle"></span>
-
-<input type="radio" id="checkFR" name="language">
-<label class="lang" for="checkFR">Fr</label>
-<input type="radio" checked="checked" id="checkENG" name="language">
-<label class="lang" for="checkENG">Eng</label>
+        .e1 {
+            transform: translate(13px, 60px) rotate(-25deg);
+        }
   
- 
+        .e2 {
+            transform: translate(6px, 40px) rotate(-20deg);
+        }
+  
+        .k1 {
+            transform: translate(3px, 23px) rotate(-15deg);
+        }
+  
+        .s1 {
+            transform: translate(2px, 14px) rotate(-10deg);
+        }
+  
+        .f {
+            transform: translate(1px, 8px) rotate(-5deg);
+        }
+  
+        .o {
+            transform: translate(0px, 5px) rotate(0deg);
+        }
+  
+        .r {
+            transform: translate(-1px, 8px) rotate(5deg);
+        }
+  
+        .G2 {
+            transform: translate(-2px, 14px) rotate(10deg);
+        }
+  
+        .e3 {
+            transform: translate(-3px, 25px) rotate(15deg);
+        }
+  
+        .e4 {
+            transform: translate(-6px, 40px) rotate(20deg);
+        }
+  
+        .k2 {
+            transform: translate(-14px, 60px) rotate(25deg);
+        }
+  
+        .s2 {
+            transform: translate(-20px, 80px) rotate(30deg);
+        }
+.s3 {
+            transform: translate(-30px, 100px) rotate(30deg);
+        }
+  
+        /* An inline-block element is placed as an inline
+         element (on the same line as adjacent content), 
+         but it behaves like a block element  */
+  
+        span {
+            display: inline-block;
+        }
+</style>
+ <body>
+<css-doodle use="var(--rule)"></css-doodle>
 
-
-<div class="message eng">
-  <p> To the one who delights me by her cuteness , the one who transforms a day at her side into a wonderful gift.</p>
-  <p class="love"> I love you Meri bonito <3 </p>
-</div>
+<p>
+  <span class="G1">F</span>
+        <span class="e1">a</span>
+        <span class="e2">t</span>
+        <span class="k1">i</span>
+        <span class="s1">m</span>
+        <span class="f">a</span>
+        <span class="o">I</span>
+        <span class="r">L</span>
+        <span class="G2">o</span>
+        <span class="e3">v</span>
+        <span class="e4">e</span>
+        <span class="k2">y</span>
+        <span class="s2">o</span>
+<span class="s3">u</span>
+</p>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/mojs/latest/mo.min.js"></script>  
+    <script src="https://unpkg.com/css-doodle@0.15.3/css-doodle.min.js"></script>  
     <script>
-var heart= document.getElementById('heart'),
-    heartW = heart.offsetWidth,
-    heartH = heart.offsetHeight;
 
-document.body.onmousemove = function( event ) {
-  var x = event.clientX - (heartW / 2);
-  var y = event.clientY  - (heartH / 2);
-  
-  heart.style.transform = "translate("+ x +"px, "+ y +"px) rotate(-45deg)"
-}
 
     </script>
 </body>
