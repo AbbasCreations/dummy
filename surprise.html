@@ -6,200 +6,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Comfortaa:300,700|Lobster+Two" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 
     <!-- Bootstrap CSS -->    
     <title>Surprise for you</title>
 <style>
-	.st0{fill:#eb1d23;}
-	.st1{fill:#F0B38A;}
-	.st2{fill:#660000;}
-	.st3{fill:#161C1D;}
-	.st4{fill:#EB1D23;}
-	.st5{fill:url(#triangle-light_4_);fill-opacity:0.3;}
-	.st6{fill:url(#triangle-light_5_);fill-opacity:0.3;}
-*, *:before, *:after {
-  box-sizing: border-box;
-}
-
- body {
-  margin: 0;
-  padding: 0;
-  background-color: #ca57a5;
-  overflow: hidden;
-}
-
-.container {
+strong{position:absolute;top:50%;transform:translateY(-50%);left:0;right:0;margin:0 auto;text-align:center;font-size:32px;text-transform:uppercase;font-family: 'Dancing Script', cursive;}
+body{--t:.5; --scale:3;}
+svg.root{width:1px;height:1px;position:absolute;left:-100em;}
+svg{
+  width: 100vw;
   height: 100vh;
-  overflow: hidden;
+  background:#c5d9fe;
+  fill-opacity:0.75;
 }
-#couple {
-  max-height: 100%;
-  width: 100%;
+	@media(max-width:575px){
+		strong{font-size:22px;}
 }
+symbol{overflow:visible}
 
-#girl-hair {
-  fill:url(#hair-gradient);
-}
-#girl-eye {
-  fill: green;
-}
+svg use{transform:rotate(0deg)); transition:transform calc(var(--t) * 1s);}
 
-#girl-earring {
-  fill: #8d8d8d;
-}
-#girl-skirt, #girl-shirt {
-  fill: #791e43;
-}
-#boy-pants {
-  fill: #848487;
-}
-#boy-sleeve {
-  fill: #b8bcbb;
-}
-
-#boy-shirt {
-  fill: #256e89;
-}
-
-#boy-hat-1 {
-   fill: #2e6773;
-}
-#boy-hat-2 {
-   fill: #4f3723;
-}
-
-#couple,
-#heart, 
-#triangle-light
-{
-  visibility: hidden;
-}
- #triangle-light {
-  fill:url(#light-gradient);
-  fill-opacity: 0.3;
-} 
-
-#ground {
-  fill: #5c5757;
+svg g.a{transition:transform calc(var(--t) * 1s);}
+svg g.a{transform:scale(var(--scale)) rotate(-90deg);
+filter:url('#f')
 }
 
 
+._2{--n : 2;}
+._3{--n : 3;}
+._4{--n : 4;}
+._5{--n : 5;}
 
-.heart {
-    position: relative;
-    width: 100px;
-    height: 90px;
-}
-.heart:before,
-.heart:after {
-    position: absolute;
-    content: "";
-    left: 50px;
-    top: 0;
-    width: 50px;
-    height: 80px;
-    background: red;
-    -moz-border-radius: 50px 50px 0 0;
-    border-radius: 50px 50px 0 0;
-    -webkit-transform: rotate(-45deg);
-       -moz-transform: rotate(-45deg);
-        -ms-transform: rotate(-45deg);
-         -o-transform: rotate(-45deg);
-            transform: rotate(-45deg);
-    -webkit-transform-origin: 0 100%;
-       -moz-transform-origin: 0 100%;
-        -ms-transform-origin: 0 100%;
-         -o-transform-origin: 0 100%;
-            transform-origin: 0 100%;
-}
-.heart:after {
-    left: 0;
-    -webkit-transform: rotate(45deg);
-       -moz-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-         -o-transform: rotate(45deg);
-            transform: rotate(45deg);
-    -webkit-transform-origin: 100% 100%;
-       -moz-transform-origin: 100% 100%;
-        -ms-transform-origin: 100% 100%;
-         -o-transform-origin: 100% 100%;
-            transform-origin :100% 100%;
-}
+svg .a g:nth-of-type(1){transform:rotate(calc(-.5 * 180deg / var(--n)));}
+svg .a g:nth-of-type(2){transform:rotate(calc( .5 * 180deg / var(--n)));}
+
+svg .a g:nth-of-type(1) use:nth-of-type(2){transform:rotate(calc(-1deg * 180 / var(--n)));}
+svg .a g:nth-of-type(1) use:nth-of-type(3){transform:rotate(calc(-2deg * 180 / var(--n)));}
+svg .a g:nth-of-type(1) use:nth-of-type(4){transform:rotate(calc(-3deg * 180 / var(--n)));}
+svg .a g:nth-of-type(1) use:nth-of-type(5){transform:rotate(calc(-4deg * 180 / var(--n)));}
+
+svg .a g:nth-of-type(2) use:nth-of-type(2){transform:rotate(calc(1deg * 180 / var(--n)));}
+svg .a g:nth-of-type(2) use:nth-of-type(3){transform:rotate(calc(2deg * 180 / var(--n)));}
+svg .a g:nth-of-type(2) use:nth-of-type(4){transform:rotate(calc(3deg * 180 / var(--n)));}
+svg .a g:nth-of-type(2) use:nth-of-type(5){transform:rotate(calc(4deg * 180 / var(--n)));}
 </style>
  <body>
-	 <div class="container">
-		 <h2 style="color:darkred;font-size:25px;text-align:center;display:block;font-weight:bold;">I love you my Queen <3</h2>
-  <svg id="couple" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="150 100 900 900">
-<defs>
-  <linearGradient id="hair-gradient">
-    <stop offset="0%" stop-color="#5e3634" />
-    <stop offset="50%" stop-color="#dfc57b" />
-  </linearGradient>
-      <linearGradient id="light-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="10%" stop-color="rgb(120,175,120)" />
-      <stop offset="60%" stop-color="#1a2124" />
-    </linearGradient>
-</defs>
-<g>
-	<path id="heart" class="st0" d="M626.6,310.7c-20.1-35-58.8-12.9-70.8,4.6c-11.7-17.5-50.7-39.6-70.8-4.6
-		c-26.2,45.9,36.6,83.2,70.2,102c0.2,0,1,0.2,1.2,0C590.1,393.8,653,356.6,626.6,310.7L626.6,310.7z"/>
-	<path id="ground" class="st0" d="M604,886.9c-234.9,0-425,17-425,38.3c0,21.1,190.3,38.1,425,38.1c235,0,425.4-17,425.4-38.1
-		C1029.4,903.9,839.2,886.9,604,886.9L604,886.9z"/>
-	<g id="girl">
-		<g id="girl-leg-1">
-			<polygon class="st1" points="698.6,810.7 817.1,839.3 820,833 705.1,788.9 			"/>
-			<polygon class="st2" points="819.3,876.7 808.5,841.1 812.5,827 832.3,833 			"/>
-		</g>
-		<g id="girl-leg-2">
-			<polygon class="st1" points="690.8,801.3 713.6,921.1 720.5,921.1 713.2,798.3 			"/>
-			<polygon class="st2" points="679.9,931.5 711,910.9 725.5,910.9 725.5,931.5 			"/>
-		</g>
-		<g id="girl-body">
-			<path id="girl-shirt" class="st0" d="M638,572.4c0,0-47.6,31.5,24,117.4l41-12.3L667.3,588l-9.7-21.6L638,572.4z"/>
-			<path id="girl-skirt" class="st0" d="M667.3,666.5c-70.9,27.4-52.2,153.8-52.2,153.8s71.9,19.6,188.3-57
-				C803.4,763.2,748.3,635.2,667.3,666.5L667.3,666.5z"/>
-			<path id="girl-arm" class="st1" d="M609.1,652.2c0,0,42.7-48.8,49.7-42.7c7.3,6.5-38.6,52-38.6,52h-76.5L609.1,652.2z"/>
-    <g id="girl-head">
-        			<path id="girl-face" class="st1" d="M695.4,509.5c-2-27.6-35.9-47.4-75.5-44.6c-39.6,3.1-70.1,27.7-68,55.1c2,27.6,35.7,47.5,75.3,44.6
-				C667,561.7,697.4,537,695.4,509.5L695.4,509.5z"/>
-			<path id="girl-eye" class="st3" d="M579.7,507.6c-4.6,0.3-8,4.4-7.7,9c0.3,4.6,4.2,8.2,8.8,7.8c4.8-0.3,8.2-4.4,7.8-9
-				C588.4,510.8,584.3,507.3,579.7,507.6L579.7,507.6z"/>
-        			<path id="girl-hair" class="st3" d="M561.8,491.5c0,0,25.8,24.7,76.2,33.5c18.5,32.6,57.5,136.6,57.5,136.6
-				s41.2,39.8,78.4-1.9c-11.2-4.4-47.4-6.3-61.4-44.4c-13.9-38.3,6.6-90-13.3-125.5c-11.6-20.9-35.4-44.2-75.7-39.4
-				C591.8,453.9,576.1,468.7,561.8,491.5L561.8,491.5z"/>
-			<path id="girl-earring" class="st4" d="M646.9,525c0,4.8-3.9,8.7-8.8,8.7c-4.8,0-8.7-3.9-8.7-8.7s3.9-8.7,8.7-8.7C643,516.3,646.9,520.2,646.9,525
-				L646.9,525z"/>
-      </g>
-			<polygon class="st1" points="635.2,561.5 642.6,577.5 659.8,569.5 651.1,550.6 			"/>
-		</g>
-	</g>
-	<g id="boy">
-		<polygon class="st2" points="481.6,901.5 498.9,901.5 500.8,901.5 500.6,903.2 532.6,925.5 480.4,925.5 480.4,901.5 		"/>
-		<rect x="474.8" y="565.8" class="st1" width="16.8" height="13.3"/>
-		<polygon class="st1" points="504.4,587.7 484.6,582.8 433.4,643.9 484.6,691.6 453.3,642.2 		"/>
-		<path class="st1" d="M478.7,461.9c-41.3,0-75,24-75,53.6c0,29.6,33.7,53.6,75,53.6c41.5,0,75.2-24,75.2-53.6
-			C553.9,485.8,520.2,461.9,478.7,461.9L478.7,461.9z"/>
-		<path id="boy-eye" class="st3" d="M534.1,503.4c-4.1,0-7.3,3.4-7.3,7.3c0,3.9,3.2,7.1,7.3,7.1c3.9,0,7.1-3.2,7.1-7.1
-			C541.3,506.8,538,503.4,534.1,503.4L534.1,503.4z"/>
-		<path class="st3" d="M526.8,473.1c0,0-3.2,30.4-57.8,46.6c0,10.5-0.8,48.1-0.8,48.1h-64.5c0,0-26.2-76,41.3-101.4
-			C463.4,461.9,489.6,454.9,526.8,473.1L526.8,473.1z"/>
-		<path id="boy-hat-2" class="st2" d="M379.9,516.6c7.1,12.6,44.9,4.9,81.8-16.3c34.2-20.4,52.7-45.9,43.7-58
-			c-8.7-11.9-40-6.5-72.5,13.4C397.9,476.3,373.1,504,379.9,516.6L379.9,516.6z"/>
-		<path id="boy-hat-1" class="st0" d="M471.2,443.3c-5.1-4.6-13.6-12.2-20.1-11.6c-11.7,1.4-28.2,10-28.2,10s-17.9,9.4-24.1,17.5
-			c-4.3,5.1-2.9,16.2-2.2,23c0.8,7,4.2,16.8,4.2,16.8c64.5-4.6,81.8-42.7,81.8-42.7S476.5,447.9,471.2,443.3L471.2,443.3z"/>
-		<polygon id="boy-pants" class="st0" points="461.5,704.9 481.6,901.5 498.9,901.5 523.2,704.9 		"/>
-		<polygon id="boy-shirt" class="st2" points="492.8,576 477.1,576 469.2,576 469.2,579 469.2,605.1 461.5,706.1 523.8,706.1 
-			509.8,576 508.3,576 		"/>
-		<polygon class="st1" points="474.6,598.3 514.7,662.4 602.3,667.3 519.8,645.9 490.1,581.6 		"/>
-		<path class="st1" d="M480.4,491.6c-6.3,0-11.6,9.7-11.6,21.4c0,11.9,5.3,21.6,11.6,21.6c6.5,0,11.6-9.7,11.6-21.6
-			C491.9,501.3,486.8,491.6,480.4,491.6L480.4,491.6z"/>
-		<polygon id="boy-sleeve" class="st0" points="469.2,594.9 489.7,626.2 513.9,610.3 493.3,579 		"/>
-	</g>
-</g>
-<polygon id="triangle-light" class="st5" points="1265.8,1383.2 542.5,0 0,1383.2 "/>
+<strong>I love you Fatima</strong>
+<svg class="root">
+  <defs>
+      <filter id="f" width="200" height="200" x="-100"  y="-100" >
+       <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur"></feGaussianBlur>
+       <feFlood flood-color="rgb(60,10,60)" result="color"/>
+       <feComposite in="color" in2="blur" operator="in" result="shadow" />
+       <feOffset in="shadow" dx="3" dy="3" result="offset"></feOffset>
+       <feMerge>
+          <feMergeNode in="offset" />
+          <feMergeNode in="SourceGraphic" />
+      </feMerge>  
+    </filter>
+  <symbol id="petal2" viewBox = "0 -100 200 200"  >
+  <!--<polygon points="0,0 120,80 200,0 120,-80 0,0" />-->
+  <path transform="translate(0,-100)" d="M25.91,-15.12 Q0,0 25.91,15.12L94.09,54.889 Q120,70 142.58,50.24L177.42,19.76 Q200,0 177.42,-19.756L142.58,-50.24 Q120,-70 94.087,-54.88Z"></path>
+  </symbol>
+    
+  <symbol id="petal3"  viewBox = "0 -100 200 200" >
+     <!--<polygon points="0,0 120,50 200,0 120,-50 0,0" />-->
+  <path transform="translate(0,-100)" d="M27.69,-11.54  Q0,0 27.69,11.54  L92.3,38.46  Q120,50 145.44,34.1 L174.56,15.9  Q200,0 174.56,-15.9 L145.44,-34.1 Q120,-50 92.3,-38.46Z" ></path>
+   </symbol>
+    
+    <symbol id="petal4"  viewBox = "0 -100 200 200" >
+<!--<polygon points="0,0 120,50 200,0 120,-50 0,0" />-->  
+<path transform="translate(0,-100)"  d="M28.09,-10.53 Q0,0 28.09,10.53L91.91,34.47 Q120,45 146.147,30.29L173.85,14.7 Q200,0 173.85,-14.7L146.15,-30.29 Q120,-45 91.91,-34.467Z"></path>
+   </symbol>
+      <symbol id="petal5"  viewBox = "0 -100 200 200" >
+    <!--<polygon points="0,0 140,40 200,0 140,-40 0,0" />-->
+  <path transform="translate(0,-100)"   d="M28.85,-8.24 Q0,0 28.85,8.24L111.15,31.76 Q140,40 164.96,23.36L175.04,16.64 Q200,0 175.038,-16.64L164.96,-23.36 Q140,-40 111.15,-31.76Z"></path>
+  </symbol>
+  </defs>
 </svg>
 
-</div>
+<svg viewBox="0 0 10000 10000" id="svg" preserveAspectRatio="xMidYMid slice">
+
+</svg>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -207,91 +98,165 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
     <script>
-// credit to the original svg https://www.vectorstock.com/royalty-free-vector/flat-with-shadow-icon-and-mobile-application-kiss-vector-6341903
+const SVG_NS = "http://www.w3.org/2000/svg";
+const SVG_XLINK = "http://www.w3.org/1999/xlink";
+let rid = null;
+let gon = 7;// 3,4,5,6....
 
-var master = new TimelineMax();
-var couple = $('#couple');
-var girl = $('#girl');
-var boy = $('#boy');
-var heart = $('#heart');
-var ground = $('#ground');
-var background = $('body');
-var light = $('#triangle-light');
-// $('.container').append(new Array(50).join('<div class="heart"></div>'));
+const colors = [
+  "#ba3763",
+  "#d34076",
+  "#dbb0cc",
+  "#fddafa",
+  "#fef2fe",
+  "#eec0db",
+  "#ca809a",
+  "#e9d8e8"
+];
 
+let m = { x: 0, y: 0 };
+let previous = { x: 0, y: 0 };
+let scale = 1;
+let bool = false;
 
-master
-  .add(setup)
-  .add(darkness, 'lightsOff+=1')
-  .add(girlKiss, 'girlStuff+=1')
-  .add(boyStuff, 'girlStuff+=2')
-  .add(heartStuff, 'heartStuff')
-  .add(lightsOn, 'heartStuff+=2');
+class Flower {
+  constructor(n, pos, scale, parent) {
+    this.n = n;
+    this.scale = scale;
+    this.pos = pos;
+    this.width = 40;
+    this.height = 40;
+    this.color = colors[~~(Math.random() * colors.length)];
+    this.parent = parent;
 
+    this.markup();
+  }
 
-function setup() {
-  var tl = new TimelineMax();
-  tl
-  .set(couple, {autoAlpha: 1})
-  .set(girl.find('#girl-earring'), {scaleY: '0.7'})
-  .set(girl.find('#girl-leg-1'), {rotation: '+=75'})
-  .set(girl.find('#girl-arm'), {transformOrigin: '100% 0%', rotation: '-=60'})
-  .set(girl.find('#girl-body'), {transformOrigin: '0% 75%', rotation: '+=20'})
-  .set(heart, {transformOrigin: '50% 50%', y: '+=100', scale: 0.5});
-  
-  return tl;
+  markup() {
+    this.G = document.createElementNS(SVG_NS, "g");
+    this.G.setAttribute("style", `--scale:${this.scale};`);
+    let rot = ~~(Math.random() * 180);
+    this.G.setAttributeNS(
+      null,
+      "transform",
+      `translate(${this.pos.x},${this.pos.y}) rotate(${rot})`
+    );
+    this.G.setAttributeNS(null, "fill", this.color);
+    let ga = document.createElementNS(SVG_NS, "g");
+    ga.setAttribute("class", "a");
+
+    for (let i = 0; i < 2; i++) {
+      // left, right
+      let g = document.createElementNS(SVG_NS, "g");
+      for (let j = 0; j < this.n; j++) {
+        let use = document.createElementNS(SVG_NS, "use");
+        use.setAttributeNS(SVG_XLINK, "xlink:href", `#petal${this.n}`);
+        use.setAttributeNS(null, "width", this.width);
+        use.setAttributeNS(null, "height", this.height);
+
+        g.appendChild(use);
+      }
+      ga.appendChild(g);
+    }
+    this.G.appendChild(ga);
+
+    this.parent.appendChild(this.G);
+  }
 }
 
 
-function darkness() {
-  var tl = new TimelineMax();
-  tl.to(background, 1, {backgroundColor: '#241a22'});
-  return tl;
+svg.addEventListener("mousedown", e => {
+  // clear the canvas
+  while (svg.lastChild) {
+    svg.removeChild(svg.lastChild);
+  }
+  // if bool == true I can draw
+  bool = true;
+});
+
+svg.addEventListener("mouseup", e => {
+  bool = false;
+  previous = {};
+});
+
+svg.addEventListener("mousemove", e => {
+  if (bool) {
+    m = oMousePosSVG(e);
+    // number of petals
+    let n = 2 + ~~(Math.random() * 4);
+    // set the scale
+    if (previous.x) {
+      let d = dist(m, previous);
+      scale = d / 30;
+    } else {
+      scale = 1;
+    }
+
+    let flower = new Flower(n, { x: m.x, y: m.y }, scale, svg);
+    setTimeout(() => {
+      flower.G.setAttribute("class", `_${flower.n}`);
+    }, 50);
+
+    previous.x = m.x;
+    previous.y = m.y;
+  } //if bool
+});
+
+function oMousePosSVG(e) {
+  var p = svg.createSVGPoint();
+  p.x = e.clientX;
+  p.y = e.clientY;
+  var ctm = svg.getScreenCTM().inverse();
+  var p = p.matrixTransform(ctm);
+  return p;
 }
 
-function girlKiss() {
-  var tl = new TimelineMax();
-  tl
-  .to(girl.find('#girl-arm'), 1, { rotation: 0})
-  .to(girl.find('#girl-body'), 0.5, {transformOrigin: '0% 75%', rotation: 0})
-  .to(girl.find('#girl-eye'), 0.5, {transformOrigin: '0% 50%', scaleY: 0.1}, 1.25)
-  .to(girl.find('#girl-leg-1'), 1.5, {rotation: 0, ease: Back.easeOut.config(3)}, 1.25);
-  
-  return tl;
+function dist(p1, p2) {
+  let dx = p2.x - p1.x;
+  let dy = p2.y - p1.y;
+  return Math.sqrt(dx * dx + dy * dy);
 }
 
+///////// Initial polygon //////////////
 
-function boyStuff() {
-  var tl = new TimelineMax();
-  tl
-    .to(boy.find('#boy-eye'), 0.5, {transformOrigin: '0% 50%', scaleY: 0.1})
-  
-  return tl;
+function algorithmPoly(gon, R) {
+  let points = [];
+  for (let a = 0; a < 2 * Math.PI; a += 0.1) {
+    let r =
+      R *
+      Math.cos(Math.PI / gon) /
+      Math.cos(a % (2 * Math.PI / gon) - Math.PI / gon);
+
+    let x = 5000 + r * Math.cos(a);
+    let y = 5000 + r * Math.sin(a);
+    points.push({ x: x, y: y, r: 5 });
+  }
+  return points;
 }
 
-function heartStuff() {
-  var tl = new TimelineMax();
-  tl
-  .to('#heart', 1, { autoAlpha: 1, y: 0, scale: 1});
-  return tl;
+let points = algorithmPoly(gon, 2500);
+
+let frames = 0;
+function Frame() {
+  rid = window.requestAnimationFrame(Frame);
+
+  if (frames >= points.length) {
+    window.cancelAnimationFrame(rid);
+    rid = null;
+  }
+  m = points[frames];
+  let n = 2 + ~~(Math.random() * 4);
+  scale = ~~(Math.random() * 12) + 3;
+
+  let flower = new Flower(n, { x: m.x, y: m.y }, scale, svg);
+  setTimeout(() => {
+    flower.G.setAttribute("class", `_${flower.n}`);
+  }, 50);
+
+  frames++;
 }
 
-
-function lightsOn() {
-  var tl = new TimelineMax();
-  tl
-  .to(light, 0.25, {autoAlpha: 1}, 0)
-  .to(ground, 0.25, {fill: '#F8E5C5'}, 0)
-  .to(girl.find('#girl-eye'), 0.5, {scaleY: 1}, 0.5)
-  .to(boy.find('#boy-eye'), 0.5, { scaleY: 1}, 1)
-  .to(girl.find('#girl-leg-1'), 1, {rotation: '+=75'})
-  .to(girl.find('#girl-body'), 0.5, { rotation: '+=20'})
- // .to(girl.find('#girl-face'), 0.5, { rotation: '-=20'});
-  
-  
-  
-  return tl;
-  
-}    </script>
+Frame();
+	</script>
 </body>
 </html>
