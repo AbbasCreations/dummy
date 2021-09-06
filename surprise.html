@@ -8,17 +8,126 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playball&display=swap" rel="stylesheet">
 
     <!-- Bootstrap CSS -->    
     <title>Surprise for you</title>
 <style>
-@import url(https://fonts.googleapis.com/css?family=Dancing+Script:400,700);
-* { margin:0; padding:0; font-family:"Dancing",san-serif;} 
-html, body { width:100%; height:100%; } 
-canvas { display:block; }
+h1{color:darkred;font-size:24px;text-transform:uppercase;position:absolute;top:50%;left:0;right:0;transform:translateY(-50%);text-align:center;font-weight:bold;font-family: 'Playball', cursive;}
+span{color:darkred;font-size:12px;text-transform:uppercase;text-align:center;font-weight:bold;}
+
+#hearts {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.heart-container {
+    float: left;
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    -moz-animation-duration: 8s;
+    -moz-animation-name: fall;
+    -moz-animation-timing-function: linear;
+    -webkit-animation-duration: 8s;
+    -webkit-animation-name: fall;
+    -webkit-animation-timing-function: linear;
+}
+@-moz-keyframes fall {
+    from {
+        top: -20px;
+    }
+    to {
+        top: 100%;
+    }
+}
+@-webkit-keyframes fall {
+    from {
+        top: -10%;
+    }
+    to {
+        top: 100%;
+    }
+}
+.heart {
+    overflow: hidden;
+    height: 20px;
+    width: 20px;
+    font-size: 20px;
+    text-align: center;
+    color: red;
+    -moz-animation-duration: 0.5s;
+    -moz-animation-name: swing;
+    -moz-animation-timing-function: ease-in-out;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-direction: alternate;
+    -moz-transform-origin: center center;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-name: swing;
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate;
+    -webkit-transform-origin: center center;
+}
+@-moz-keyframes swing {
+    from {
+        -moz-transform: rotate(-45deg) translateX(10px);
+    }
+    to {
+        -moz-transform: rotate(45deg) translateX(-10px);
+    }
+}
+@-moz-keyframes spin {
+    from {
+        -moz-transform: scaleX(1) translateX(5px);
+    }
+    50% {
+        -moz-transform: scaleX(0.1);
+    }
+    to {
+        -moz-transform: scaleX(1) translateX(-5px);
+    }
+}
+@-webkit-keyframes swing {
+    from {
+        -webkit-transform: rotate(-45deg) translateX(10px);
+    }
+    to {
+        -webkit-transform: rotate(45deg) translateX(-10px);
+    }
+}
+@-webkit-keyframes spin {
+    from {
+        -webkit-transform: scaleX(1) translateX(5px);
+    }
+    50% {
+        -webkit-transform: scaleX(0.1);
+    }
+    to {
+        -webkit-transform: scaleX(1) translateX(-5px);
+    }
+}
+
 </style>
  <body>
+
+<div id="hearts">
+       <h1>
+        My Love for you is like<br>these hearts they keep<br>coming and coming forever<br>I would die without you<br>I love you Fatima
+        </h1>
+    <div class="heart-container">
+       
+ <div class="heart">
+            &hearts;
+        </div>
+         
+    </div>
+</div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -29,133 +138,28 @@ canvas { display:block; }
 
     <script>
 
-window.addEventListener('resize', resize, false);
-
-var cellSize = 200;
-var numHearts = 100;
-var sizeRange = 100;
-var minSize = 40;
-var hearts = [];
-
-var chars = [
-  "❤","♡","♥", 
-]
-
-function Particle(x, y){
-  this.x = x;
-  this.y = y;
-  this.xSpeed = random()*7 - 3;
-  this.ySpeed = random()*7 - 3;
-  this.char = chars[floor(random()*chars.length)];
+function newHeart () {
+    var hearts = $('.heart');
+    if (hearts.length >= 1000) return setTimeout(newHeart, 100);
+    var c = $('.heart-container:first').clone();
+    var anims = ['swing', 'spin'];
+    var a = anims[Math.round(Math.random())];
+    c.find('.heart')
+                  .css('opacity', 0.2 + Math.random() * 0.8)
+                  .css('-webkit-animation-name', a)
+                  .css('-moz-animation-name', a);
+    c.css('left', (10 + Math.random() * ($('body').innerWidth() - 10)) + 'px');
+    c.css('-webkit-animation-name', 'fall');
+    c.css('-webkit-animation-duration', (4 + Math.random() * 14) + 's');
+    c.css('-webkit-transform', 'scale(' + (0.4 + Math.random() * 2) + ')');
+    c.css('-moz-animation-duration', (4 + Math.random() * 14) + 's');
+    c.css('-moz-transform', 'scale(' + (0.4 + Math.random() * 2) + ')');
+    $('#hearts').append(c);
+    c.bind('animationend', function () { c.remove(); });
+    c.bind('webkitAnimationEnd', function () { c.remove(); });
+    setTimeout(newHeart, 200);
 }
-
-Particle.prototype.render = function(){
-  this.x += this.xSpeed;
-  this.y += this.ySpeed;
-  text(this.char, this.x, this.y);
-}
-
-function Heart(x, y){
-  this.x = x;
-  this.y = y;
-  this.size = random()*sizeRange + minSize;
-  this.hue = (260 + random()*105)%360;
-  this.sat = random()*30 + 70;
-  this.bal = random()*20 + 80;
-  this.speed = this.size/40;
-  this.exploding = 1000;
-  this.particles = [];
-  for (var i = 0; i < 20; i++){
-    this.particles.push(new Particle(0, 0));
-  }
-}
-
-Heart.prototype.render = function(){
-  
-  if (this.exploding > 100 && dist(this.x, this.y, mouseX, mouseY) < this.size/2){
-    this.exploding = 0;
-    for (var i = 0; i < this.particles.length; i++){
-      var p = this.particles[i];
-      p.x = this.x;
-      p.y = this.y;
-    }
-  }
-  fill(this.hue, this.sat, this.bal);
-  textSize(this.size);
-  
-  if (this.exploding < 50){
-    textSize(this.size/2);
-    if (this.exploding > 25){
-      var alpha = (50 - this.exploding)/25;
-      fill(this.hue, this.sat, this.bal, alpha);
-    }
-    
-    for (var i = 0; i < this.particles.length; i++){
-      this.particles[i].render();
-    }
-  } else {
-    if (this.exploding < 100){
-      var alpha = (this.exploding-50)/50;
-      fill(this.hue, this.sat, this.bal, alpha);
-    } 
-    text("❤", this.x, this.y);
-  }
-  
-  this.y = (this.y + this.speed);
-  if (this.y > height + this.size){
-    this.y = 0 - this.size;
-  }
-  
-  this.exploding++;
-}
-  
-function setup(){
-  createCanvas();
-  colorMode(HSB, 360, 100, 100);
-  textAlign(CENTER, CENTER);
-  resize();
-}
-
-function init(){
-  hearts = [];
-  
-  var gridWidth = floor(width/cellSize);
-  var gridHeight = floor(height/cellSize);
-  
-  for (var i = 0; i < numHearts; i++){
-    hearts.push(new Heart(random()*width, random()*height));
-  }
-  
-  hearts.sort(function(a, b){
-    return (a.size > b.size);
-  })
-}
-
-function draw(){
-  background(350, 10, 100);
-  if (hearts == undefined) return;
-  
-  noStroke();
-  for (var i = 0; i < hearts.length; i++){
-    hearts[i].render();
-  }
-  
-  fill(139, 0, 0);
-  var size = width/10
-  if (height < width) size = (height/10);
-  stroke(240, 100, 50);
-  textSize(size);
-  strokeWeight(size/15);
-  text("You make my heart", width/2, height*.4);
-  text("burst with love", width/2, height*.5);
-  text("♡", width/2, height*.6);
-  
-}
-
-function resize(){
-  resizeCanvas(window.innerWidth, window.innerHeight);
-  init();
-}
+setTimeout(newHeart, 200);
 	</script>
 </body>
 </html>
