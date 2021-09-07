@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Comfortaa:300,700|Lobster+Two" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,119 +15,355 @@
     <!-- Bootstrap CSS -->    
     <title>Surprise for you</title>
 <style>
-h1{color:darkred;font-size:24px;text-transform:uppercase;position:absolute;top:50%;left:0;right:0;transform:translateY(-50%);text-align:center;font-weight:bold;font-family: 'Playball', cursive;}
-span{color:darkred;font-size:12px;text-transform:uppercase;text-align:center;font-weight:bold;}
-
-#hearts {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+body {
+  background: deepPink;
+  color: pink;
+  text-shadow: 0 0 40px pink;
 }
-.heart-container {
-    float: left;
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    -moz-animation-duration: 8s;
-    -moz-animation-name: fall;
-    -moz-animation-timing-function: linear;
-    -webkit-animation-duration: 8s;
-    -webkit-animation-name: fall;
-    -webkit-animation-timing-function: linear;
+.bubbling-heart div {
+  position: fixed;
+  font-family: 'Playball', cursive;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 25vh) scale(0);
+  opacity: 0;
+  animation: bubbleUp 3s infinite;
 }
-@-moz-keyframes fall {
-    from {
-        top: -20px;
-    }
-    to {
-        top: 100%;
-    }
+.bubbling-heart div .fa {
+  transform: translateX(12.5vw) rotate(25deg);
+  animation: oscillate 6s ease-in-out infinite;
 }
-@-webkit-keyframes fall {
-    from {
-        top: -10%;
-    }
-    to {
-        top: 100%;
-    }
+.bubbling-heart div:nth-child(2) {
+  animation-delay: 0.75s;
 }
-.heart {
-    overflow: hidden;
-    height: 20px;
-    width: 20px;
-    font-size: 20px;
-    text-align: center;
-    color: red;
-    -moz-animation-duration: 0.5s;
-    -moz-animation-name: swing;
-    -moz-animation-timing-function: ease-in-out;
-    -moz-animation-iteration-count: infinite;
-    -moz-animation-direction: alternate;
-    -moz-transform-origin: center center;
-    -webkit-animation-duration: 0.5s;
-    -webkit-animation-name: swing;
-    -webkit-animation-timing-function: ease-in-out;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-direction: alternate;
-    -webkit-transform-origin: center center;
+.bubbling-heart div:nth-child(2) .fa {
+  animation-delay: 1.5s;
 }
-@-moz-keyframes swing {
-    from {
-        -moz-transform: rotate(-45deg) translateX(10px);
-    }
-    to {
-        -moz-transform: rotate(45deg) translateX(-10px);
-    }
+.bubbling-heart div:nth-child(3) {
+  animation-delay: 1.5s;
 }
-@-moz-keyframes spin {
-    from {
-        -moz-transform: scaleX(1) translateX(5px);
-    }
-    50% {
-        -moz-transform: scaleX(0.1);
-    }
-    to {
-        -moz-transform: scaleX(1) translateX(-5px);
-    }
+.bubbling-heart div:nth-child(3) .fa {
+  animation-delay: 3s;
 }
-@-webkit-keyframes swing {
-    from {
-        -webkit-transform: rotate(-45deg) translateX(10px);
-    }
-    to {
-        -webkit-transform: rotate(45deg) translateX(-10px);
-    }
+.bubbling-heart div:nth-child(4) {
+  animation-delay: 2.25s;
 }
-@-webkit-keyframes spin {
-    from {
-        -webkit-transform: scaleX(1) translateX(5px);
-    }
-    50% {
-        -webkit-transform: scaleX(0.1);
-    }
-    to {
-        -webkit-transform: scaleX(1) translateX(-5px);
-    }
+.bubbling-heart div:nth-child(4) .fa {
+  animation-delay: 4.5s;
+}
+.bubbling-heart div:nth-child(5) {
+  animation-delay: 3s;
+}
+.bubbling-heart div:nth-child(5) .fa {
+  animation-delay: 6s;
+}
+.bubbling-heart div:nth-child(6) {
+  animation-delay: 3.75s;
+}
+.bubbling-heart div:nth-child(6) .fa {
+  animation-delay: 7.5s;
+}
+.bubbling-heart div:nth-child(7) {
+  animation-delay: 4.5s;
+}
+.bubbling-heart div:nth-child(7) .fa {
+  animation-delay: 9s;
+}
+.bubbling-heart div:nth-child(8) {
+  animation-delay: 5.25s;
+}
+.bubbling-heart div:nth-child(8) .fa {
+  animation-delay: 10.5s;
+}
+.bubbling-heart div:nth-child(9) {
+  animation-delay: 6s;
+}
+.bubbling-heart div:nth-child(9) .fa {
+  animation-delay: 12s;
+}
+.bubbling-heart div:nth-child(10) {
+  animation-delay: 6.75s;
+}
+.bubbling-heart div:nth-child(10) .fa {
+  animation-delay: 13.5s;
+}
+.bubbling-heart div:nth-child(11) {
+  animation-delay: 7.5s;
+}
+.bubbling-heart div:nth-child(11) .fa {
+  animation-delay: 15s;
+}
+.bubbling-heart div:nth-child(12) {
+  animation-delay: 8.25s;
+}
+.bubbling-heart div:nth-child(12) .fa {
+  animation-delay: 16.5s;
+}
+.bubbling-heart div:nth-child(13) {
+  animation-delay: 9s;
+}
+.bubbling-heart div:nth-child(13) .fa {
+  animation-delay: 18s;
+}
+.bubbling-heart div:nth-child(14) {
+  animation-delay: 9.75s;
+}
+.bubbling-heart div:nth-child(14) .fa {
+  animation-delay: 19.5s;
+}
+.bubbling-heart div:nth-child(15) {
+  animation-delay: 10.5s;
+}
+.bubbling-heart div:nth-child(15) .fa {
+  animation-delay: 21s;
+}
+.bubbling-heart div:nth-child(16) {
+  animation-delay: 11.25s;
+}
+.bubbling-heart div:nth-child(16) .fa {
+  animation-delay: 22.5s;
+}
+.bubbling-heart div:nth-child(17) {
+  animation-delay: 12s;
+}
+.bubbling-heart div:nth-child(17) .fa {
+  animation-delay: 24s;
+}
+.bubbling-heart div:nth-child(18) {
+  animation-delay: 12.75s;
+}
+.bubbling-heart div:nth-child(18) .fa {
+  animation-delay: 25.5s;
+}
+.bubbling-heart div:nth-child(19) {
+  animation-delay: 13.5s;
+}
+.bubbling-heart div:nth-child(19) .fa {
+  animation-delay: 27s;
+}
+.bubbling-heart div:nth-child(20) {
+  animation-delay: 14.25s;
+}
+.bubbling-heart div:nth-child(20) .fa {
+  animation-delay: 28.5s;
+}
+.bubbling-heart div:nth-child(21) {
+  animation-delay: 15s;
+}
+.bubbling-heart div:nth-child(21) .fa {
+  animation-delay: 30s;
+}
+.bubbling-heart div:nth-child(22) {
+  animation-delay: 15.75s;
+}
+.bubbling-heart div:nth-child(22) .fa {
+  animation-delay: 31.5s;
+}
+.bubbling-heart div:nth-child(23) {
+  animation-delay: 16.5s;
+}
+.bubbling-heart div:nth-child(23) .fa {
+  animation-delay: 33s;
+}
+.bubbling-heart div:nth-child(24) {
+  animation-delay: 17.25s;
+}
+.bubbling-heart div:nth-child(24) .fa {
+  animation-delay: 34.5s;
+}
+.bubbling-heart div:nth-child(25) {
+  animation-delay: 18s;
+}
+.bubbling-heart div:nth-child(25) .fa {
+  animation-delay: 36s;
+}
+.bubbling-heart div:nth-child(26) {
+  animation-delay: 18.75s;
+}
+.bubbling-heart div:nth-child(26) .fa {
+  animation-delay: 37.5s;
+}
+.bubbling-heart div:nth-child(27) {
+  animation-delay: 19.5s;
+}
+.bubbling-heart div:nth-child(27) .fa {
+  animation-delay: 39s;
+}
+.bubbling-heart div:nth-child(28) {
+  animation-delay: 20.25s;
+}
+.bubbling-heart div:nth-child(28) .fa {
+  animation-delay: 40.5s;
+}
+.bubbling-heart div:nth-child(29) {
+  animation-delay: 21s;
+}
+.bubbling-heart div:nth-child(29) .fa {
+  animation-delay: 42s;
+}
+.bubbling-heart div:nth-child(30) {
+  animation-delay: 21.75s;
+}
+.bubbling-heart div:nth-child(30) .fa {
+  animation-delay: 43.5s;
+}
+.bubbling-heart div:nth-child(31) {
+  animation-delay: 22.5s;
+}
+.bubbling-heart div:nth-child(31) .fa {
+  animation-delay: 45s;
+}
+.bubbling-heart div:nth-child(32) {
+  animation-delay: 23.25s;
+}
+.bubbling-heart div:nth-child(32) .fa {
+  animation-delay: 46.5s;
+}
+.bubbling-heart div:nth-child(33) {
+  animation-delay: 24s;
+}
+.bubbling-heart div:nth-child(33) .fa {
+  animation-delay: 48s;
+}
+.bubbling-heart div:nth-child(34) {
+  animation-delay: 24.75s;
+}
+.bubbling-heart div:nth-child(34) .fa {
+  animation-delay: 49.5s;
+}
+.bubbling-heart div:nth-child(35) {
+  animation-delay: 25.5s;
+}
+.bubbling-heart div:nth-child(35) .fa {
+  animation-delay: 51s;
+}
+.bubbling-heart div:nth-child(36) {
+  animation-delay: 26.25s;
+}
+.bubbling-heart div:nth-child(36) .fa {
+  animation-delay: 52.5s;
+}
+.bubbling-heart div:nth-child(37) {
+  animation-delay: 27s;
+}
+.bubbling-heart div:nth-child(37) .fa {
+  animation-delay: 54s;
+}
+.bubbling-heart div:nth-child(38) {
+  animation-delay: 27.75s;
+}
+.bubbling-heart div:nth-child(38) .fa {
+  animation-delay: 55.5s;
+}
+.bubbling-heart div:nth-child(39) {
+  animation-delay: 28.5s;
+}
+.bubbling-heart div:nth-child(39) .fa {
+  animation-delay: 57s;
+}
+.bubbling-heart div:nth-child(40) {
+  animation-delay: 29.25s;
+}
+.bubbling-heart div:nth-child(40) .fa {
+  animation-delay: 58.5s;
+}
+.bubbling-heart div:nth-child(41) {
+  animation-delay: 30s;
+}
+.bubbling-heart div:nth-child(41) .fa {
+  animation-delay: 60s;
+}
+.bubbling-heart div:nth-child(42) {
+  animation-delay: 30.75s;
+}
+.bubbling-heart div:nth-child(42) .fa {
+  animation-delay: 61.5s;
+}
+.bubbling-heart div:nth-child(43) {
+  animation-delay: 31.5s;
+}
+.bubbling-heart div:nth-child(43) .fa {
+  animation-delay: 63s;
+}
+.bubbling-heart div:nth-child(44) {
+  animation-delay: 32.25s;
+}
+.bubbling-heart div:nth-child(44) .fa {
+  animation-delay: 64.5s;
+}
+.bubbling-heart div:nth-child(45) {
+  animation-delay: 33s;
+}
+.bubbling-heart div:nth-child(45) .fa {
+  animation-delay: 66s;
+}
+.bubbling-heart div:nth-child(46) {
+  animation-delay: 33.75s;
+}
+.bubbling-heart div:nth-child(46) .fa {
+  animation-delay: 67.5s;
+}
+.bubbling-heart div:nth-child(47) {
+  animation-delay: 34.5s;
+}
+.bubbling-heart div:nth-child(47) .fa {
+  animation-delay: 69s;
+}
+.bubbling-heart div:nth-child(48) {
+  animation-delay: 35.25s;
+}
+.bubbling-heart div:nth-child(48) .fa {
+  animation-delay: 70.5s;
+}
+.bubbling-heart div:nth-child(49) {
+  animation-delay: 36s;
+}
+.bubbling-heart div:nth-child(49) .fa {
+  animation-delay: 72s;
+}
+.bubbling-heart div:nth-child(50) {
+  animation-delay: 36.75s;
+}
+.bubbling-heart div:nth-child(50) .fa {
+  animation-delay: 73.5s;
+}
+@keyframes bubbleUp {
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -25vh) scale(2);
+  }
+}
+@keyframes oscillate {
+  50% {
+    transform: translateX(-12.5vw) rotate(-25deg);
+  }
 }
 
 </style>
 	</head>
  <body>
 
-<div id="hearts">
-       <h1>
-        My Love for you is like<br>these hearts they keep<br>coming and coming forever<br>I would die without you<br>I love you Fatima
-        </h1>
-    <div class="heart-container">
-       
- <div class="heart">
-            &hearts;
-        </div>
-         
-    </div>
+<div class="bubbling-heart">
+  <div><i class="fa fa-heart fa-5x"></i>Abbas</div>
+  <div><i class="fa fa-heart fa-5x"></i>Loves</div>
+  <div><i class="fa fa-heart fa-5x"></i>You</div>
+  <div><i class="fa fa-heart fa-5x"></i>Fatima</div>
+<div><i class="fa fa-heart fa-5x"></i></div>
+<div><i class="fa fa-heart fa-5x"></i></div>
+<div><i class="fa fa-heart fa-5x"></i></div>
+<div><i class="fa fa-heart fa-5x"></i></div>
+<div><i class="fa fa-heart fa-5x"></i></div>
+<div><i class="fa fa-heart fa-5x"></i></div>
+<div><i class="fa fa-heart fa-5x"></i></div>
+<div><i class="fa fa-heart fa-5x"></i></div>
+<div><i class="fa fa-heart fa-5x"></i></div>
+<div><i class="fa fa-heart fa-5x"></i></div>
+<div><i class="fa fa-heart fa-5x"></i></div>
+<div><i class="fa fa-heart fa-5x"></i></div>
+ <div><i class="fa fa-heart fa-5x"></i></div>
+<div><i class="fa fa-heart fa-5x"></i></div>
 </div>
 
     <!-- Optional JavaScript -->
@@ -138,28 +374,6 @@ span{color:darkred;font-size:12px;text-transform:uppercase;text-align:center;fon
 
     <script>
 
-function newHeart () {
-    var hearts = $('.heart');
-    if (hearts.length >= 1000) return setTimeout(newHeart, 100);
-    var c = $('.heart-container:first').clone();
-    var anims = ['swing', 'spin'];
-    var a = anims[Math.round(Math.random())];
-    c.find('.heart')
-                  .css('opacity', 0.2 + Math.random() * 0.8)
-                  .css('-webkit-animation-name', a)
-                  .css('-moz-animation-name', a);
-    c.css('left', (10 + Math.random() * ($('body').innerWidth() - 10)) + 'px');
-    c.css('-webkit-animation-name', 'fall');
-    c.css('-webkit-animation-duration', (4 + Math.random() * 14) + 's');
-    c.css('-webkit-transform', 'scale(' + (0.4 + Math.random() * 2) + ')');
-    c.css('-moz-animation-duration', (4 + Math.random() * 14) + 's');
-    c.css('-moz-transform', 'scale(' + (0.4 + Math.random() * 2) + ')');
-    $('#hearts').append(c);
-    c.bind('animationend', function () { c.remove(); });
-    c.bind('webkitAnimationEnd', function () { c.remove(); });
-    setTimeout(newHeart, 200);
-}
-setTimeout(newHeart, 200);
 	</script>
 </body>
 </html>
