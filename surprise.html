@@ -529,11 +529,11 @@ var Clock = (function() {
         
         text = texts[0],
         textNum = 0,
-        textSize = 60, 
+        textSize = 40, 
         valentine = false, 
         msgTime = 100, 
         updateColor = true, 
-        width = 420; 
+        width = 920; 
     
     var FRAME_RATE = 60, 
         MIN_WIDTH = 0, 
@@ -542,7 +542,7 @@ var Clock = (function() {
         RADIUS = Math.PI * 2; 
 
     var defaultStyles = function() {
-        // textSize = 36;
+        // textSize = 30;
         // particleColor = 'rgba(226,225,142, 0.7)';
     };
 
@@ -557,7 +557,7 @@ var Clock = (function() {
     var loop = function() {
         
         ctx.clearRect(0, 0, width, height);
-        // textSize = 36;
+        // textSize = 30;
 
         ctx.fillStyle = "rgb(255, 255, 255)";
         ctx.textBaseline = "middle";
@@ -671,7 +671,7 @@ var Clock = (function() {
         // width = window.innerWidth;
         // height = window.innerHeight;
 
-        canvas.width = window.innerWidth >= 420 ? 420 : width;
+        canvas.width = window.innerWidth >= 920 ? 920 : width;
         canvas.height = window.innerHeight >= 150 ? 150 : height;
 
         width = canvas.width;
