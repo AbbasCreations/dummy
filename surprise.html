@@ -223,37 +223,23 @@ body:active .light {
 ***/
 #batman-logo {
 	filter: contrast(1.5) blur(0.5px);
-	height: 4.35vmin;
-	overflow: hidden;
-	position: absolute;
-	width: 16vmin;
-	background: #000;
-	left: 1.85vmin;
-	top: 9.75vmin;
-	background-image: -webkit-gradient(
-		linear,
-		left bottom,
-		right top,
-		color-stop(0, rgb(72, 84, 92)),
-		color-stop(0.63, rgb(25, 26, 26)),
-		color-stop(0.86, rgb(26, 26, 26))
-	);
-	background-image: -moz-linear-gradient(
-		/* Remember Browser specific prefixes! */ left bottom,
-		/* Gradient start point (the angle) */ rgb(72, 84, 92) 0%,
-		/* First colour and start point */ rgb(25, 26, 26) 63%,
-		/* Second colour and start point */ rgb(26, 26, 26) 86%
-	);
-	background-image: -o-linear-gradient(
-		left bottom,
-		rgb(72, 84, 92) 0%,
-		rgb(25, 26, 26) 63%,
-		rgb(26, 26, 26) 86%
-	);
-	transform: rotateZ(48deg) rotateY(15deg) rotateX(0deg) scaleY(1.75)
-		scaleX(1.25);
-	box-shadow: 0 0 10vmin 2vmin #fff;
-	border-radius: 5% 5% 100% 100%;
+    height: auto;
+    overflow: hidden;
+    position: absolute;
+    width: 16vmin;
+    /* background: #000; */
+    left: -6px;
+    transform: translateY(10px);
+    top: 50%;
+    /* background-image: -webkit-gradient( linear, left bottom, right top, color-stop(0, rgb(72, 84, 92)), color-stop(0.63, rgb(25, 26, 26)), color-stop(0.86, rgb(26, 26, 26)) ); */
+    background-image: -moz-linear-gradient( /* Remember Browser specific prefixes! */ left bottom, /* Gradient start point (the angle) */ rgb(72, 84, 92) 0%, /* First colour and start point */ rgb(25, 26, 26) 63%, /* Second colour and start point */ rgb(26, 26, 26) 86% );
+    background-image: -o-linear-gradient( left bottom, rgb(72, 84, 92) 0%, rgb(25, 26, 26) 63%, rgb(26, 26, 26) 86% );
+    transform: rotateZ(
+48deg) rotateY(
+15deg) rotateX(
+0deg) scaleY(1.75) scaleX(1.25) translateY(-25%);
+    box-shadow: 0 0 10vmin 2vmin #fff;
+    border-radius: 5% 5% 100% 100%;
 }
 
 #batman-logo div {
