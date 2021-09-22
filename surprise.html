@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Comfortaa:300,700|Lobster+Two" rel="stylesheet">
-<link rel="stylesheet" href="https://rawcdn.githack.com/jcoulterdesign/theCaretaker/a17b3dea4b8d4c39b36e28b8b0c19dde10d02605/caretakerFinal.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Romanesco&display=swap" rel="stylesheet">
@@ -17,126 +17,152 @@
 
     <!-- Bootstrap CSS -->    
     <title>Surprise for you</title>
-<style>
-body{
-  overflow: hidden;
-  margin: 0;
-}
-h1{
-  position: fixed;
-  top: 50%;
-  left: 0;
+<style>html,
+body {
   width: 100%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+
+body {
+  user-select: none;
+  background-color: #eee;
+  overflow: hidden;
+  background: radial-gradient(rgb(255, 255, 255), rgb(200, 200, 200));
+}
+
+#hearContainer {
+  width: 128px;
+  height: 128px;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  left: 50%;
+  top: 280px;
+  overflow: visible;
+}
+
+#bigHeart {
+  position: absolute;
+  left: 50%;
+  bottom: 0px;
+  transform: translate(-50%, 0%);
+  cursor: pointer;
+}
+
+#shadow {
+  position: absolute;
+  width: 70%;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.2);
+  left: 50%;
+  bottom: -2px;
+  transform: translate(-50%, 0%);
+}
+
+.hearts {
+  transform: translate(-50%, -50%);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  opacity: 0;
+}
+
+.circ {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: absolute;
+  transform: translate(-4px, 0px);
+  cursor: pointer;
+  border: 4px solid rgb(150, 30, 20);
+}
+
+.dots {
+  width: 7px;
+  height: 7px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color:red;
+  border-radius: 50%;
+}
+
+#desc {
+  white-space: nowrap;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 370px;
   text-align: center;
-  transform:translateY(-50%);
-  font-family: 'Love Ya Like A Sister', cursive;
-  font-size: 35px;
-  color: #c70012;
-  padding: 0 20px;
+  font-size: 20px;
+  font-family: tahoma;
 }
-@media (min-width:1200px){
-  h1{
-    font-size: 40px;
-  }
+
+#desc span {
+  color: red;
 }
+
+
 </style>
 <body>
-<canvas></canvas>
-<h1>You are the cursor and see my love follows you whereever you go ❤</h1>
-<script>
-var canvas = document.querySelector("canvas"),
-  ctx = canvas.getContext("2d");
+<div id='hearContainer'>
+  <div id='shadow'></div>
+  <img id='bigHeart' src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/183204/heart_(1).png" alt="heart" height="90%" width="90%">
+</div>
+<div id='desc'>Click on my heart to see what it does when you tap send to send me a random message<span>Fatima ❤</span> !</div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenMax.min.js"></script>  
+<script src="https://codepen.io/MAW/pen/XVRpEE"></script>
+  <script>
 
-var ww,wh;
 
-function onResize(){
-  ww = canvas.width = window.innerWidth;
-  wh = canvas.height = window.innerHeight;
-}
-
-ctx.strokeStyle = "red";
-ctx.shadowBlur = 25;
-ctx.shadowColor = "hsla(0, 100%, 60%,0.5)";
-
-var precision = 100;
-var hearts = [];
-var mouseMoved = false;
-function onMove(e){
-  mouseMoved = true;
-  if(e.type === "touchmove"){
-    hearts.push(new Heart(e.touches[0].clientX, e.touches[0].clientY));
-    hearts.push(new Heart(e.touches[0].clientX, e.touches[0].clientY));
-  }
-  else{
-    hearts.push(new Heart(e.clientX, e.clientY));
-    hearts.push(new Heart(e.clientX, e.clientY));
-  }
-}
-
-var Heart = function(x,y){
-  this.x = x || Math.random()*ww;
-  this.y = y || Math.random()*wh;
-  this.size = Math.random()*2 + 1;
-  this.shadowBlur = Math.random() * 10;
-  this.speedX = (Math.random()+0.2-0.6) * 8;
-  this.speedY = (Math.random()+0.2-0.6) * 8;
-  this.speedSize = Math.random()*0.05 + 0.01;
-  this.opacity = 1;
-  this.vertices = [];
-  for (var i = 0; i < precision; i++) {
-    var step = (i / precision - 0.5) * (Math.PI * 2);
-    var vector = {
-      x : (15 * Math.pow(Math.sin(step), 3)),
-      y : -(13 * Math.cos(step) - 5 * Math.cos(2 * step) - 2 * Math.cos(3 * step) - Math.cos(4 * step)) 
-    }
-    this.vertices.push(vector);
-  }
-}
-
-Heart.prototype.draw = function(){
-  this.size -= this.speedSize;
-  this.x += this.speedX;
-  this.y += this.speedY;
-  ctx.save();
-  ctx.translate(-1000,this.y);
-  ctx.scale(this.size, this.size);
-  ctx.beginPath();
-  for (var i = 0; i < precision; i++) {
-    var vector = this.vertices[i];
-    ctx.lineTo(vector.x, vector.y);
-  }
-  ctx.globalAlpha = this.size;
-  ctx.shadowBlur = Math.round((3 - this.size) * 10);
-  ctx.shadowColor = "hsla(0, 100%, 60%,0.5)";
-  ctx.shadowOffsetX = this.x + 1000;
-  ctx.globalCompositeOperation = "screen"
-  ctx.closePath();
-  ctx.fill()
-  ctx.restore();
+var container = document.getElementById('hearContainer') , 
+    bigHeart = document.getElementById('bigHeart') ,
+    shadow = document.getElementById('shadow') ,
+    heartSrc = bigHeart.getAttribute('src') ,
+    A = document.createElement('audio');
+A.src = 'http://www.freesound.org/data/previews/265/265296_5003039-lq.mp3';  A.volume=0.7;
+container.addEventListener('click',generateHeart);
+function generateHeart(){
+  A.currentTime=0.09; A.play();
+  TweenMax.fromTo([bigHeart,shadow],.15,{scale:1},{scale:.88,repeat:1,yoyo:true,ease:Back.easeIn.config(7)})
+  var 
+  newH = document.createElement('img') ,
+  newC = document.createElement('div') ,
+  WH = R(80,15) , newDs = [] ;
+  for(var nd,i=2; i--;){ 
+    nd = document.createElement('div'); nd.className='dots'; 
+    newDs.push(nd); container.insertBefore(nd,bigHeart);
+  };
+  newH.src = heartSrc; newH.className='hearts'; newC.className='circ';
+  TweenLite.set(newH,{width:WH,height:WH})
+  container.insertBefore(newH,bigHeart); container.appendChild(newC);
+  heartAnim(newH,newC,newDs);
 };
-
-
-function render(a){
-  requestAnimationFrame(render);
-  
-  hearts.push(new Heart())
-  ctx.clearRect(0,0,ww,wh);
-  for (var i = 0; i < hearts.length; i++) {
-    hearts[i].draw();
-    if(hearts[i].size <= 0){
-      hearts.splice(i,1);
-      i--;
+function heartAnim(e1,e2,e34){
+  var dur = R(3.5,1.5) , Path = [] , Y = R(-250,-380) , xStep = ~~R(6,3) ;
+  for(var i=1; i<xStep; i++){ Path.push({x:R(32,-96) , y:i*(Y/xStep)}) };
+  TweenLite.to(e1,dur,{scale:.3,
+    bezier:{ curviness:1.5,values:Path,autoRotate:90 },
+    onComplete:function(){ container.removeChild(e1); container.removeChild(e2); }
+  });
+  TweenLite.to(e1,dur-0.2,{force3D:true,opacity:1,ease:SlowMo.ease.config(0.1,0.8,true)});
+  TweenLite.fromTo(e2,.6,{force3D:true,scale:.3},{scale:1,opacity:0});
+  TweenMax.staggerTo(e34,R(3.5,1.5),{force3D:true,opacity:0,scale:0,
+    cycle:{
+      bezier:function(){
+        var nPath = [];
+        for(var i=1; i<xStep; i++){ nPath.push({x:R(32,-96) , y:i*(Y/xStep)}) };
+        return {curviness:1.5,values:nPath}
+      }
     }
-  }
-}
+  },R(0.5,0),function(){for(var i=2;i--;){container.removeChild(e34[i]);}});  
+};
+function R(M,m) { return m+(M-m)*Math.random(); };
 
 
 
-onResize();
-window.addEventListener("mousemove", onMove);
-window.addEventListener("touchmove", onMove);
-window.addEventListener("resize", onResize);
-requestAnimationFrame(render);
 </script>
 </body>
 </html>
