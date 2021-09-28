@@ -222,7 +222,7 @@ body canvas {
   DogeText.prototype.step = function() {
     var now = +new Date();
     if(now >= this.next) {
-      this.life  = rand(50, 250);
+      this.life  = rand(50, 1250);
       this.spawn = now;
       this.next  = +new Date() + rand(1000, 2500);
     }
