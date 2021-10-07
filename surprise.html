@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&amp;display=swap" rel="stylesheet">
 
 
     <!-- Bootstrap CSS -->    
@@ -20,339 +20,194 @@
 <style>
 body, html {
   margin: 0;
-  padding: 0;
 }
-
-body {
-  background: #000000;
-}
-body canvas {
+canvas {
   display: block;
-}</style>
+}
+a {
+  font-family: 'Montserrat', sans-serif;
+  font-size:20px;
+  position: absolute;
+  top:50%;
+  left:0;
+  right:0;
+  transform:translateY(-50%);
+  width: 620px;
+  height: 50px;
+  line-height: 50px;
+margin:0 auto;
+  box-sizing: border-box;
+  text-align: center;
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 50px;
+}
+p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 19px;
+  position: absolute;
+  top:5%;
+  left:0;
+  right:0;
+  transform:translateY(-50%);
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+margin:0 auto;
+  box-sizing: border-box;
+  text-align: center;
+  text-decoration: none;
+  color: #fff; 
+}
+span {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 19px;
+  position: absolute;
+  bottom:0%;
+  left:0;
+  right:0;
+  transform:translateY(-50%);
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+margin:0 auto;
+  box-sizing: border-box;
+  text-align: center;
+  text-decoration: none;
+  color: #fff; 
+}
+</style>
 <body>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenMax.min.js"></script>  
+  <div id="app"></div>
+  <script src="https://codepen.io/soju22/pen/40e576c3acef9d41be38338a5abfc3d4.js"></script>  
 
   <script>
-;(function(window, document, undefined) {
-  'use strict';
+// Made with TroisJS : https://github.com/troisjs/trois
+import { createApp } from 'https://unpkg.com/vue@3.0.11/dist/vue.esm-browser.prod.js'
+import { lerp, BufferGeometry, Camera, EffectComposer, Points, Renderer, RenderPass, Scene, ShaderMaterial, Texture, UnrealBloomPass, ZoomBlurPass } from 'https://unpkg.com/troisjs@0.3.0-beta.4/build/trois.module.cdn.min.js'
+import { Clock, Color, MathUtils, Vector3 } from 'https://unpkg.com/three@0.127.0/build/three.module.js'
 
-  // simple requestAnimationFrame polyfill.
-  window.requestAnimFrame = (function(){
-    return window.requestAnimationFrame    ||
-      window.webkitRequestAnimationFrame ||
-      window.mozRequestAnimationFrame    ||
-      function( callback ){
-      window.setTimeout(callback, 4000 / 600);
-    };
-  })();
+const { randFloat: rnd, randInt, randFloatSpread: rndFS } = MathUtils
 
-  // images that will be used
-  var imageAssets = {
-    doge: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/188512/doge.png",
-    dogeSmall: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/188512/doge-small.png"
-  }, imageAssetsArray = [], i;
-
-  // keep track of the assets in a queue array, which will be used to load them all in order.
-  for(i in imageAssets) {
-    imageAssetsArray.push({
-      index: i,
-      value: imageAssets[i]
-    });
+const vertexShader = `
+  uniform float uTime;
+  attribute vec3 color;
+  attribute float size;
+  attribute float velocity;
+  varying vec4 vColor;
+  void main(){
+    vColor = vec4(color, 1.0);
+    vec3 p = vec3(position);
+    p.z = -150. + mod(position.z + uTime, 300.);
+    vec4 mvPosition = modelViewMatrix * vec4( p, 1.0 );
+    gl_PointSize = size * (-50.0 / mvPosition.z);
+    gl_Position = projectionMatrix * mvPosition;
   }
+`
 
-  /**
-     * Load all the imageAssets before doing anything else. 
-     * A callback function will be called when all images have 
-     * loaded or when something goes wrong.
-     * @param {Function} cb a callback function
-     */
-  function loadAllImages(cb) {
-    var index = 0, loaded = {}, loader = function() {
-      var imageObject = new Image();
-
-      /**
-             * onload put the loaded image in an object and continue if necessary.
-             * calls {@link cb the callback function} when it is done.
-             */
-      imageObject.onload = function() {
-        loaded[imageAssetsArray[index].index] = imageObject;
-
-        index++;
-        if(index >= imageAssetsArray.length) {
-          cb.call(null, loaded);
-        } else {
-          loader();
-        }
-      };
-
-      /**
-             * onerror call the {@link cb callback function} when anything fails.
-             */
-      imageObject.onerror = function() {
-        cb.call(null, null, "such problems, much error");
-      };
-
-      // set the source and start loading
-      imageObject.src = imageAssetsArray[index].value;
-    };
-
-    // initiate the loader.
-    loader();
+const fragmentShader = `
+  uniform sampler2D uTexture;
+  varying vec4 vColor;
+  void main() {
+    gl_FragColor = vColor * texture2D(uTexture, gl_PointCoord);
   }
+`
 
-  /**
-     * generate a random number between a range
-     * @param   {Number} min minimum
-     * @param   {Number} max maximum
-     * @returns {Number} random number between min and max.
-     */
-  var rand = function rand(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  };
+createApp({
+  template: `
+    <Renderer ref="renderer" pointer resize="window">
+      <Camera :position="{ z: 0 }" :fov="50" />
+      <Scene>
+        <Points ref="points" :position="{ z: -150 }">
+          <BufferGeometry :attributes="attributes" />
+          <ShaderMaterial :blending="2" :depth-test="false" :uniforms="uniforms" :vertex-shader="vertexShader" :fragment-shader="fragmentShader">
+            <Texture src="https://assets.codepen.io/33787/sprite.png" uniform="uTexture" />
+          </ShaderMaterial>
+        </Points>
+      </Scene>
+      <EffectComposer>
+        <RenderPass />
+        <UnrealBloomPass :strength="2" :radius="0" :threshold="0" />
+        <ZoomBlurPass :strength="zoomStrength" />
+      </EffectComposer>
+    </Renderer>
+    <p>This is how my heart beats without you 😞</p>
+    <a href="#" @click="updateColors" @mouseenter="targetTimeCoef = 100" @mouseleave="targetTimeCoef = 1">Hover on me to see how it beats when i'm with you.💑</a>
+<span>Plus the number of these particle is my love for you , which cant be quantified.❤️</span>
+  `,
+  components: { BufferGeometry, Camera, EffectComposer, Points, Renderer, RenderPass, Scene, ShaderMaterial, Texture, UnrealBloomPass, ZoomBlurPass },
+  setup() {
+    const POINTS_COUNT = 50000
 
-  /**
-     * scale a 2d size down according to a max width and height.
-     * @param   {Number} w  width of current size
-     * @param   {Number} h  height of current size
-     * @param   {Number} mw maximum width
-     * @param   {Number} mh maximum height
-     * @returns {Object} object containing scaled (and floored) width and height as `w' field and `h' field.
-     */
-  var scale = function scale(w, h, mw, mh) {
-    var r, nw, nh;
-    if(w > mw) {
-      r  = (mw / w);
-      nw = mw;
-      nh = (r * h);
+    const palette = niceColors[83]
+
+    const positions = new Float32Array(POINTS_COUNT * 3)
+    const colors = new Float32Array(POINTS_COUNT * 3)
+    const sizes = new Float32Array(POINTS_COUNT)
+    const v3 = new Vector3(), color = new Color()
+    for (let i = 0; i < POINTS_COUNT; i++) {
+      v3.set(rndFS(200), rndFS(200), rndFS(300))
+      v3.toArray(positions, i * 3)
+      color.set(palette[Math.floor(rnd(0, palette.length))])
+      color.toArray(colors, i * 3)
+      sizes[i] = rnd(5, 20)
     }
 
-    if(h > mh) {
-      r  = (mh / h);
-      nw = (r * w);
-      nh = mh;
-    }
+    const attributes = [
+      { name: 'position', array: positions, itemSize: 3 },
+      { name: 'color', array: colors, itemSize: 3 },
+      { name: 'size', array: sizes, itemSize: 1 },
+    ]
+
+    const uniforms = { uTime: { value: 0 } }
+
+    const clock = new Clock()
+
+    const timeCoef = 1, targetTimeCoef = 1
 
     return {
-      w: Math.floor(nw),
-      h: Math.floor(nh)
-    };
-  };
-
-  // RGB color object
-  var RGB = function(r, g, b) {
-    this.r = r;
-    this.g = g;
-    this.b = b;
-  };
-
-  RGB.prototype.toString = function() {
-    return 'rgb(' + this.r + ', ' + this.g + ', ' + this.b + ')';
-  };
-
-  /**
-     * calculate random RGB color
-     * @param   {Number} min minimum value for r, g and b
-     * @param   {Number} max maximum value for r, g and b
-     * @returns {RGB}    an RGB color instance
-     */
-  RGB.random = function(min, max) {
-    return new RGB(rand(min, max), rand(min, max), rand(min, max));
-  };
-
-  /** 
-     * calculate and advanced random color
-     * @param   {Object} rmm random min/max description object
-     * @returns {RGB}    an RGB color instance
-     */
-  RGB.randomEx = function(rmm) {
-    return new RGB(
-      rand(rmm.rmin, rmm.rmax),
-      rand(rmm.gmin, rmm.gmax),
-      rand(rmm.bmin, rmm.bmax)
-    );
-  };
-
-  var Canvas = function Canvas() {
-    this.canvas  = document.createElement('canvas');
-    this.context = this.canvas.getContext('2d');
-    this.fit();
-    document.body.appendChild(this.canvas);
-  };
-
-  Canvas.prototype.fit = function() {
-    this.resize(window.innerWidth, window.innerHeight);
-  };
-
-  Canvas.prototype.resize = function(width, height) {
-    this.canvas.width  = this.width  = width;
-    this.canvas.height = this.height = height;
-  };
-
-  Canvas.prototype.clear = function(opacity) {
-    if(typeof opacity === "number") {
-      this.context.fillStyle = 'rgba(0, 0, 0, ' + opacity + ')';
-      this.context.fillRect(0, 0, this.width, this.height);
-    } else {
-      this.context.clearRect(0, 0, this.width, this.height);
+      POINTS_COUNT,
+      attributes, uniforms, vertexShader, fragmentShader,
+      clock, timeCoef, targetTimeCoef,
     }
-  };
-
-  var DogeText = function DogeText(cx, cy, text, angle, offset, shift, color) {
-    this.font   = '20px "Comic Sans MS"';
-    this.text   = text;
-    this.color  = color || new RGB(255, 0, 0);
-    this.angle  = angle || -45;
-    this.offset = offset || -110;
-    this.shift  = shift || -60;
-    this.cx     = this.cy = 0;
-
-    this.life   = 0;
-    this.spawn  = 0;
-    this.next   = +new Date() + rand(0, 2000);
-
-    this.position(cx, cy);
-  };
-
-  DogeText.prototype.position = function(cx, cy) {
-    this.cx = cx;
-    this.cy = cy + this.shift;
-  };
-
-  DogeText.prototype.step = function() {
-    var now = +new Date();
-    if(now >= this.next) {
-      this.life  = rand(50, 1250);
-      this.spawn = now;
-      this.next  = +new Date() + rand(1000, 2500);
+  },
+  data() {
+    return {
+      zoomStrength: 0,
     }
-  };
+  },
+  mounted() {
+    const renderer = this.$refs.renderer
+    const positionN = renderer.three.pointer.positionN
+    const points = this.$refs.points.points
 
-  DogeText.prototype.render = function(ctx) {
-    // if the text age exceeds its life, do not render and wait for step to revive it. 
-    if((+new Date() - this.spawn) >= this.life) return;
+    renderer.onBeforeRender(() => {
+      this.timeCoef = lerp(this.timeCoef, this.targetTimeCoef, 0.02)
+      this.uniforms.uTime.value += this.clock.getDelta() * this.timeCoef * 4
+      this.zoomStrength = this.timeCoef * 0.004
 
-    ctx.save();
-    ctx.translate(this.cx + this.offset, this.cy);
-    ctx.rotate(this.angle * (Math.PI / 180));
-    ctx.fillStyle = this.color.toString();
-    ctx.font      = this.font;
-    ctx.fillText(this.text, 0, 0);
-    ctx.restore();
-
-
-  };
-
-  var HeartParticle = function HeartParticle(i, s, cx, cy, image) {
-    this.i   = i;
-    this.s   = s;
-    this.x   = this.y  = 0;
-    this.ox  = this.oy = 0;
-    this.img = image;
-    this.fac = Math.random();
-
-    this.position(cx, cy);
-  };
-
-  HeartParticle.prototype.position = function(cx, cy) {
-    // the heart curve
-    this.ox = this.x = cx + 160 * Math.pow(Math.sin(this.i), 3);
-    this.oy = this.y = cy + 11 * (-(15 * Math.cos(this.i) - 5 * Math.cos(2 * this.i) - 2 * Math.cos(3 * this.i) - Math.cos(4 * this.i)));
-  };
-
-  HeartParticle.prototype.step = function() {
-    // just increase the factor until it reaches 1, then start over
-    this.fac += 0.01;
-    if(this.fac >= 1) {
-      this.fac = 0;
-    }
-  };
-
-  HeartParticle.prototype.render = function(ctx) {
-    /**
-            this.fac is responsible as size factor and as opacity factor.
-            this way, when (1 - this.fac) === 0, the size has reached its max too.
-        */
-
-    var rw = (this.s.w * this.fac),
-        rh = (this.s.h * this.fac),
-        rx = (this.x - (this.s.w / 2)),
-        ry = (this.y - (this.s.h / 2));
-
-    ctx.save();
-    ctx.globalAlpha = (1 - this.fac);
-    ctx.drawImage(this.img, rx, ry, rw, rh);
-    ctx.restore();
-  };
-
-  window.addEventListener('load', function() {
-    // loadAllImages and only if it succeeds, proceed.
-    loadAllImages(function(loadedAssets, errorMessage) {
-      if(typeof errorMessage !== "string") {
-        var c = new Canvas(),
-            ctx = c.context,
-            cx = c.width / 2, 
-            cy = c.height / 2,
-            i, 
-            p = [],
-            cds = scale(loadedAssets.doge.width, loadedAssets.doge.height, 160, 160); // center doge size scaled down
-
-        // dogeSmallWidth and dogeSmallHeight
-        var dsw = loadedAssets.dogeSmall.width,
-            dsh = loadedAssets.dogeSmall.height;
-
-        // generate all the doge particles
-        for(i = 0; i < 230; i++) {
-          var randomSize = rand(10, 70),
-              size = scale(dsw, dsh, randomSize, randomSize);
-
-          p.push(new HeartParticle(i, size, cx, cy, loadedAssets.dogeSmall));
-        }
-
-        // a bunch of text that periodically appears, at random.
-        p.push(new DogeText(cx, cy, "Bub"));
-        p.push(new DogeText(cx, cy, "Many love", 45, 50, -100, new RGB(255, 0, 255)));
-        p.push(new DogeText(cx, cy, "Cute faces", -55, -220, -110, new RGB(255, 255, 0)));
-        p.push(new DogeText(cx, cy, "Moni Shonee", 55, 160, -160, new RGB(0, 255, 0)));
-        p.push(new DogeText(cx, cy, "Paru Kaki", -12, 260, -20, new RGB(0, 100, 255)));
-        p.push(new DogeText(cx, cy, "Kako bonoo", 50, -180, 110, new RGB(255, 100, 0)));
-        p.push(new DogeText(cx, cy, "Love most", -50, 140, 140, new RGB(0, 255, 100)));
-
-        window.addEventListener('resize', function() {
-          // make sure the canvas fits snuggly into the window.
-          c.fit();
-
-          var i,
-              cx = c.width / 2, 
-              cy = c.height / 2;
-
-          // make sure all objects know about the new center.
-          for(i in p) p[i].position(cx, cy);
-        });
-
-        (function anim() {
-          requestAnimFrame(anim);
-
-          var i, 
-              cx = c.width / 2,
-              cy = c.height / 2;
-
-          // clear the canvas
-          c.clear(0.7);
-
-          // step and render all HeartParticles and texts
-          for(i in p) p[i].step();
-          for(i in p) p[i].render(ctx);
-
-          // render the main doge, the doge that is tripping.
-          ctx.drawImage(loadedAssets.doge, cx - (cds.w / 2) - 10, cy - (cds.h / 2), cds.w, cds.h);
-        }());
-      } else {
-        alert(errorMessage);
+      const da = 0.05
+      const tiltX = lerp(points.rotation.x, positionN.y * da, 0.02)
+      const tiltY = lerp(points.rotation.y, -positionN.x * da, 0.02)
+      points.rotation.set(tiltX, tiltY, 0)
+    })
+  },
+  methods: {
+    updateColors() {
+      const colorAttribute = this.$refs.points.geometry.attributes.color
+      const ip = randInt(0, 99); const palette = niceColors[ip]; console.log(ip)
+      const color = new Color()
+      for (let i = 0; i < this.POINTS_COUNT; i++) {
+        color.set(palette[randInt(0, palette.length)])
+        color.toArray(colorAttribute.array, i * 3)
       }
-    });
-  });
-}(window, document));
+      colorAttribute.needsUpdate = true
+    },
+  },
+}).mount('#app')
+
 </script>
 </body>
 </html>
