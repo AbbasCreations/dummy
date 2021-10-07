@@ -123,7 +123,7 @@ createApp({
         <Points ref="points" :position="{ z: -150 }">
           <BufferGeometry :attributes="attributes" />
           <ShaderMaterial :blending="2" :depth-test="false" :uniforms="uniforms" :vertex-shader="vertexShader" :fragment-shader="fragmentShader">
-            <Texture src="https://assets.codepen.io/33787/sprite.png" uniform="uTexture" />
+            <Texture src="https://raw.githubusercontent.com/CelerantDevteam/dummy/main/sprite.png" uniform="uTexture" />
           </ShaderMaterial>
         </Points>
       </Scene>
