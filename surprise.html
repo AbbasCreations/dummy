@@ -22,11 +22,13 @@
 body{
   width:100%;
   margin:0;
+  height:100%;
+  background:#272d4d;
   overflow:hidden;
 }
 canvas{position:absolute;top:50%;transform:translateY(-50%);}
-p{position:absolute;top:5%;left:0;right:0;font-size:54px;color:pink;text-transform:uppercase;text-align:center;z-index:999999999999999999999999999999999999999999;}
-b{position:absolute;bottom:5%;left:0;right:0;font-size:44px;color:pink;text-transform:uppercase;text-align:center;}
+p{position:absolute;top:5%;left:0;right:0;font-size:54px;color:pink;text-transform:uppercase;text-align:center;z-index:999999999999999999999999999999999999999999;font-family:"Quicksand",san-serif;}
+b{position:absolute;bottom:5%;left:0;right:0;font-size:44px;color:pink;text-transform:uppercase;text-align:center;font-family:"Quicksand",san-serif;}
 </style>
 <body>
 <p>I</p>
@@ -35,8 +37,8 @@ b{position:absolute;bottom:5%;left:0;right:0;font-size:44px;color:pink;text-tran
   <script>
 var c = document.getElementById("canv");
 var $ = c.getContext("2d");
-c.width = window.innerWidth;
-c.height = window.innerHeight;
+c.width = 1000;
+c.height = 500;
 
 var spíritus = 10;
 var juntos = 100;
