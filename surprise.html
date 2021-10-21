@@ -19,124 +19,263 @@
     <!-- Bootstrap CSS -->    
     <title>Surprise for you</title>
 <style>
-body{
-  width:100%;
-  margin:0;
-  height:100%;
-  background:#272d4d;
-  overflow:hidden;
+* {
+  margin: 0;
+  padding: 0;
 }
-canvas{position:absolute;top:50%;transform:translateY(-50%);}
-p{position:absolute;top:5%;left:5%;font-size:94px;color:pink;text-transform:uppercase;text-align:center;z-index:999999999999999999999999999999999999999999;font-family:"Quicksand",san-serif;}
-b{position:absolute;bottom:1.5%;right:18%;font-size:84px;color:pink;text-transform:uppercase;text-align:center;font-family:"Quicksand",san-serif;}
+
+canvas#canvas {
+  display: block;
+  background: #ee9ca7;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #ffdde1, #ee9ca7);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #ffdde1, #ee9ca7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+p{position:absolute;top:2.5%;left:0;right:0;text-align:center;font-size:38px;color:darkred;font-family:"Romanesco",sans-serif;}
+b{position:absolute;bottom:2.5%;left:0;right:0;text-align:center;font-size:38px;color:darkred;font-style:normal;font-weight:normal;font-family:"Romanesco",sans-serif;}
+
 </style>
 <body>
-<p>I</p>
-<canvas id = 'canv'></canvas>
-<b>YOU</b>  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<p>This is what my heart does when i see you.</p>
+<canvas id="canvas">Canvas not supported.</canvas>
+<b>The mini hearts is my love that keeps on multiplying.</b>
   <script>
-var c = document.getElementById("canv");
-var $ = c.getContext("2d");
-c.width = 1000;
-c.height = 500;
+(function () {
+  'use strict';
+  window.addEventListener('load', function () {
+    var canvas = document.getElementById('canvas');
 
-var spíritus = 10;
-var juntos = 100;
+    if (!canvas || !canvas.getContext) {
+      return false;
+    }
 
-function heart() {
-  var love = this;
-  var tolerance = 1e3; 
-      love.isPatient =  (humans / 4) % c.width; 
-      love.isKind = Math.floor((humans / 4) / c.height); 
-      love.doesNotEnvy = randomKindness() * spíritus; 
-      love.isNotProud = randomKindness() * spíritus; 
-      love.doesNotDishonor = 2 + randomKindness(1) * spíritus; 
-      love.isNotAngered = 0.05; 
-      love.isColorful = Math.random() * 360;  
-      love.rejoices = spíritus + randomKindness(1) * spíritus; 
-      love.thyNeighborx = randomKindness(1) * tolerance;
-      love.thyNeighbory = randomKindness(1) * tolerance;
-      love.everyone = function() {
-        unitet = unitat = love.doesNotDishonor;
-        unité = love.thyNeighborx;
-        unità = love.thyNeighbory;
-        $.fillStyle = 'hsla( '+ love.isColorful +', 90%, 65%, 1)';
-        $.beginPath();
-        $.moveTo(unité + 0.5 * unitat, unità + 0.3 * unitet);
-        $.bezierCurveTo(unité + 0.1 * unitat, unità, unité, 
-                        unità + 0.6 * unitet, unité + 0.5 * 
-                        unitat, unità + 0.9 * unitet);
-        $.bezierCurveTo(unité + 1 * unitat, unità + 0.6 * 
-                        unitet, unité + 0.9 * unitat, unità, 
-                        unité + 0.5 * unitat,
-                        unità + 0.3 * unitet);
-        $.closePath();
-        $.fill();
+    /********************
+      Random Number
+    ********************/
+
+    function rand(min, max) {
+      return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    /********************
+      Var
+    ********************/
+
+    // canvas 
+    var ctx = canvas.getContext('2d');
+    var X = canvas.width = window.innerWidth;
+    var Y = canvas.height = window.innerHeight;
+
+    // heart
+    var heartNum = 1;
+    var hearts = [];
+    var miniHeartNum = 100;
+    var miniHearts =[];
+
+    var rad = Math.PI / 180;
+    var GRAVITY = 0.01;
+
+    /********************
+      Animation
+    ********************/
+
+    window.requestAnimationFrame =
+      window.requestAnimationFrame ||
+      window.mozRequestAnimationFrame ||
+      window.webkitRequestAnimationFrame ||
+      window.msRequestAnimationFrame ||
+      function (cb) {
+        setTimeout(cb, 17);
       };
-      love.deeply = function() {
-        unité = love.thyNeighborx;
-        unità = love.thyNeighbory;
-        feliz = love.rejoices;
-        forcë = love.isPatient;
-        spíritus = love.isKind;
-        unité < forcë - love.rejoices && 
-          ((love.thyNeighborx = forcë - feliz), 
-           (love.doesNotEnvy *= -1));
-        unité > forcë + love.rejoices && 
-          ((love.thyNeighborx = forcë + feliz), 
-           (love.doesNotEnvy *= -1));
-        unità < spíritus - feliz && 
-          ((love.thyNeighbory = spíritus - feliz), 
-           (love.isNotProud *= -1));
-        unità > spíritus + feliz && 
-          ((love.thyNeighbory = spíritus + feliz), 
-           (love.isNotProud *= -1));
+
+    /********************
+      MiniHeart
+    ********************/
+    
+    function MiniHeart(ctx, x, y, r) {
+      this.ctx = ctx;
+      this.init(x, y, r);
+    }
+
+    MiniHeart.prototype.init = function (x, y, r) {
+      this.ctx = ctx;
+      this.r = r;
+      this.x1 = x;
+      this.y1 = y;
+      this.a = rand(0, 360);
+      this.num = 22.5;
+      this.v = {
+        x: rand(-6, 6) * Math.random(),
+        y: rand(-6, 6) * Math.random()
       };
-      love.endlessly = function() {
-        love.doesNotEnvy > juntos && (love.doesNotEnvy = juntos);
-        love.isNotProud > juntos && (love.isNotProud = juntos);
-        love.thyNeighborx += love.doesNotEnvy * love.isNotAngered;
-        love.thyNeighbory += love.isNotProud * love.isNotAngered;
-        love.deeply();
+      this.x2 = this.x1 + this.r * Math.cos(this.a * rad);
+      this.y2 = this.y1 + this.r * Math.sin(this.a * rad);
+      this.cx1 = this.x1 + this.r * Math.cos((this.a + this.num) * rad);
+      this.cy1 = this.y1 + this.r * Math.sin((this.a + this.num) * rad);
+      this.cx2 = this.x1 + this.r * Math.cos((this.a - this.num) * rad);
+      this.cy2 = this.y1 + this.r * Math.sin((this.a - this.num) * rad);
+      this.chord = 2 * this.r * Math.sin(this.num * rad / 2);
+    };
+
+    MiniHeart.prototype.draw = function () {
+      ctx = this.ctx;
+      ctx.save();
+      ctx.beginPath();
+      ctx.fillStyle = 'rgb(251, 125, 175)';
+      ctx.strokeStyle = 'rgb(251, 125, 175)';
+      ctx.moveTo(this.x2, this.y2);
+      ctx.arc(this.cx1, this.cy1, this.chord, (270 + this.a) * rad, (270 + this.a + 225) * rad);
+      ctx.lineTo(this.x1, this.y1);
+      ctx.closePath();
+      ctx.fill();
+      ctx.moveTo(this.x2, this.y2);
+      ctx.arc(this.cx2, this.cy2, this.chord, (90 + this.a) * rad, (90 + this.a + 135) * rad, true);
+      ctx.lineTo(this.x1, this.y1);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+      ctx.restore();
+    };
+    
+    MiniHeart.prototype.wrapPosition = function() {
+      if (this.y1 > Y || this.x1 < 0 || this.x1 > X) {
+        this.init(X / 2, Y / 2, rand(5, 30));
+      }
+    };
+
+    MiniHeart.prototype.updatePosition = function() {
+      this.v.y += GRAVITY;
+      this.x1 += this.v.x;
+      this.x2 += this.v.x;
+      this.cx1 += this.v.x;
+      this.cx2 += this.v.x;
+      this.y1 += this.v.y;
+      this.y2 += this.v.y;
+      this.cy1 += this.v.y;
+      this.cy2 += this.v.y;
+    };
+
+    MiniHeart.prototype.render = function () {
+      this.updatePosition();
+      this.wrapPosition();
+      this.draw();
+    };
+
+    /********************
+      Heart
+    ********************/
+
+    function Heart(ctx, x, y, r) {
+      this.ctx = ctx;
+      this.init(x, y, r);
+    }
+
+    Heart.prototype.init = function (x, y, r) {
+      this.ctx = ctx;
+      this.r = r;
+      this.x1 = x;
+      this.y1 = y + this.r / 1.5
+      this.a = -90;
+      this.num = 22.5;
+      this.color = {
+        r: 251,
+        g: 125,
+        b: 175,
+        a: 1
       };
-} noHate();
+      this.x2 = this.x1 + this.r * Math.cos(this.a * rad);
+      this.y2 = this.y1 + this.r * Math.sin(this.a * rad);
+      this.cx1 = this.x1 + this.r * Math.cos((this.a + this.num) * rad);
+      this.cy1 = this.y1 + this.r * Math.sin((this.a + this.num) * rad);
+      this.cx2 = this.x1 + this.r * Math.cos((this.a - this.num) * rad);
+      this.cy2 = this.y1 + this.r * Math.sin((this.a - this.num) * rad);
+      this.chord = 2 * this.r * Math.sin(this.num * rad / 2);
+    };
 
-function noHate() {
-  $.fillStyle = "#272D4D";
-  $.fillRect(0, 0, c.width, c.height);
-}
+    Heart.prototype.draw = function () {
+      ctx = this.ctx;
+      ctx.save();
+      ctx.fillStyle = this.gradient();
+      ctx.shadowColor = '#f9005f';
+      ctx.shadowOffsetX = 5;
+      ctx.shadowOffsetY = 5;
+      ctx.shadowBlur = 5;
+      ctx.beginPath();
+      ctx.moveTo(this.x2, this.y2);
+      ctx.arc(this.cx1, this.cy1, this.chord, (270 + this.a) * rad, (270 + this.a + 225) * rad);
+      ctx.lineTo(this.x1, this.y1);
+      ctx.moveTo(this.x2, this.y2);
+      ctx.arc(this.cx2, this.cy2, this.chord, (90 + this.a) * rad, (90 + this.a + 135) * rad, true);
+      ctx.lineTo(this.x1, this.y1);
+      ctx.fill();
+      ctx.restore();
+    };
 
-function randomKindness(r) {
-  rnd = Math.random();
-  return r ? 2 * rnd - 1 : rnd;
-}
+    Heart.prototype.gradient = function () {
+      var col = this.color.r + "," + this.color.g + "," + this.color.b;
+      var g = this.ctx.createRadialGradient(this.x1, this.y1 - this.r / 1.5, 0, this.x1, this.y1 - this.r / 1.5, this.r);
+      g.addColorStop(0, "rgba(" + col + ", " + (this.color.a * 0) + ")");
+      g.addColorStop(0.5, "rgba(" + col + ", " + (this.color.a * 0.5) + ")");
+      g.addColorStop(1, "rgba(" + col + ", " + (this.color.a * 1) + ")");
+      return g;
+    };
 
-$.fillStyle = "hsla(0,0%,0%,1)";
-$.font = "Bold 12em sans-serif";
-var t = "LOVE".split("").join(String.fromCharCode(0x2006));
-$.fillText(t, (c.width - $.measureText(t).width) * 0.5, c.height * 0.5);
+    Heart.prototype.render = function () {
+      this.draw();
+    };
+    
+    /********************
+      Create
+    ********************/
+     
+    for (var i = 0; i < heartNum; i++) {
+      var heart = new Heart(ctx, X / 2, Y / 2, 150);
+      hearts.push(heart);
+    }
 
-world = [];
-diversity = $.getImageData(0, 0, c.width, c.height);
-we = diversity.data; riseUp = 0;
+    for (var i = 0; i < miniHeartNum; i++) {
+      var miniHeart = new MiniHeart(ctx, X / 2, Y / 2, rand(5, 30));
+      miniHearts.push(miniHeart);
+    }
 
-for (humans = 0; humans < we.length; humans += 4)
-  0 == we[humans] && (riseUp++, 0 == riseUp % 20 && 
- ((amour = new heart()), amour.everyone(), world.push(amour)));
+    /********************
+      Render
+    ********************/
+    
+    function render() {
+      ctx.clearRect(0, 0, X, Y);
+      for (var i = 0; i < hearts.length; i++) {
+        hearts[i].render();
+      }
+      for (var i = 0; i < miniHearts.length; i++) {
+        miniHearts[i].render();
+      }
+      requestAnimationFrame(render);
+    }
 
-function hope(){
-  noHate();
-  for (humans in world) 
-    (amar = world[humans]), amar.endlessly(), amar.everyone();
-  window.requestAnimationFrame(hope);
-}; hope();
+    render();
 
-window.addEventListener('resize',function(){
-  c.width = window.innerWidth;
-  c.height = window.innerHeight;
-},false);
+    /********************
+      Resize
+    ********************/
+    
+    function onResize() {
+      X = canvas.width = window.innerWidth;
+      Y = canvas.height = window.innerHeight;
+      hearts[0].init(X / 2, Y / 2, 150);
+    }
 
-console.log('Coded With ❤ Always, @tmrDevelops');
+    /********************
+      Event
+    ********************/
+
+    window.addEventListener('resize', function () {
+      onResize();
+    });
+
+  });
+  // Author
+  console.log('File Name / mellomelloMellow.js\nCreated Date / January 15, 2020\nAuthor / Toshiya Marukubo\nTwitter / https://twitter.com/toshiyamarukubo');
+})();
 
 </script>
 </body>
