@@ -921,10 +921,25 @@ html .container .boy .body .foot .shoes, body .container .boy .body .foot .shoes
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  
 <script>
 
-  $( document ).ready(function() {
-   let x = document.getElementById("birthday_song"); 
-x.play();
-});
+Audio.prototype.play = (function(play) {
+return function () {
+  var audio = this,
+      args = arguments,
+      promise = play.apply(audio, args);
+  if (promise !== undefined) {
+    promise.catch(_ => {
+      // Autoplay was prevented. This is optional, but add a button to start playing.
+      var el = document.createElement("button");
+      el.innerHTML = "Play";
+      el.addEventListener("click", function(){play.apply(audio, args);});
+      this.parentNode.insertBefore(el, this.nextSibling)
+    });
+  }
+};
+})(Audio.prototype.play);
+
+// Try automatically playing our audio via script. This would normally trigger and error.
+document.getElementById('birthday_song').play();
 
   /* Comment the below line to mute the audio*/
   
