@@ -5,15 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Comfortaa:300,700|Lobster+Two" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Romanesco&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&amp;display=swap" rel="stylesheet">
+   
 
 
     <!-- Bootstrap CSS -->    
@@ -119,142 +111,188 @@ cursor: url('F.png'), auto;
 
 
 </body>
-   
-<script type="module">
-import React, {useEffect, useState, useRef, memo} from 'https://cdn.skypack.dev/react';
-import ReactDOM from 'https://cdn.skypack.dev/react-dom';
-
-const PATH_LENGTH = 1506;
-const LAYERS = 20;
-const LAYER_GAP = 2; // In pixels
-
-const clamp = (min, max, n) => (
-  Math.min(max, Math.max(min, n))
-);
-
-const useDocumentEvent = (event, handler) => {
-  useEffect(() => {
-    const events = event.split(' ');
-    events.forEach(event => document.addEventListener(event, handler));
-    return () => events.forEach(event => document.removeEventListener(event, handler));
-  }, []);
+   <script>
+     "use strict";
+var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
 };
-
-const useTimeArray = delay => {
-  const [timestamps, setTimestamps] = useState([]);
-  const timeout = useRef();
-  useEffect(() => {
-    return () => clearTimeout(timeout.current);
-  }, []);
-  return {timestamps, add: () => {
-    setTimestamps(arr => [...arr, Date.now()]);
-    timeout.current = setTimeout(() => setTimestamps(arr => arr.filter(t => Date.now() - t < delay)), delay + 1);
-  }};
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
 };
-
-const useCursorTilt = ({ref, tilt, bounds}) => {
-  const [rotate, setRotate] = useState([-25,25]);
-  useEffect(() => {
-    const handleMouseMove = e => {
-      requestAnimationFrame(() => {
-        const {left, top, width, height} = ref.current.getBoundingClientRect();
-        const [x, y] = [e.clientX, e.clientY];
-        const rect = bounds 
-          ? {top: top - bounds, left: left - bounds, width: width + bounds * 2, height: height + bounds * 2}
-          : {top: 0, left: 0, width: window.innerWidth, height: window.innerHeight};
-        
-        setRotate([
-          (-(clamp(0, rect.height, y - rect.top) - (rect.height/2)) / rect.height) * tilt,
-          ((clamp(0, rect.width, x - rect.left) - (rect.width/2)) / rect.width) * tilt,
-        ]);
-      });
-    }
-    document.addEventListener('mousemove', handleMouseMove);
-    return () => document.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-  return rotate;
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = require("https://cdn.skypack.dev/react");
+var react_dom_1 = require("https://cdn.skypack.dev/react-dom");
+var PATH_LENGTH = 1506;
+var LAYERS = 20;
+var LAYER_GAP = 2; // In pixels
+var clamp = function (min, max, n) { return (Math.min(max, Math.max(min, n))); };
+var useDocumentEvent = function (event, handler) {
+    react_1.useEffect(function () {
+        var events = event.split(' ');
+        events.forEach(function (event) { return document.addEventListener(event, handler); });
+        return function () { return events.forEach(function (event) { return document.removeEventListener(event, handler); }); };
+    }, []);
 };
-
-const Splash = memo(({circles}) => {
-  return (
-    <svg viewBox='0 0 500 430' className='splash'>
-      {circles.map(timestamp => (
-        <HeartPath key={timestamp}/>
-        // <circle cx={50} cy={50} r={50} key={timestamp}/>
-      ))}
-    </svg>
-  );
+var useTimeArray = function (delay) {
+    var _a = react_1.useState([]), timestamps = _a[0], setTimestamps = _a[1];
+    var timeout = react_1.useRef();
+    react_1.useEffect(function () {
+        return function () { return clearTimeout(timeout.current); };
+    }, []);
+    return { timestamps: timestamps, add: function () {
+            setTimestamps(function (arr) { return __spreadArrays(arr, [Date.now()]); });
+            timeout.current = setTimeout(function () { return setTimestamps(function (arr) { return arr.filter(function (t) { return Date.now() - t < delay; }); }); }, delay + 1);
+        } };
+};
+var useCursorTilt = function (_a) {
+    var ref = _a.ref, tilt = _a.tilt, bounds = _a.bounds;
+    var _b = react_1.useState([-25, 25]), rotate = _b[0], setRotate = _b[1];
+    react_1.useEffect(function () {
+        var handleMouseMove = function (e) {
+            requestAnimationFrame(function () {
+                var _a = ref.current.getBoundingClientRect(), left = _a.left, top = _a.top, width = _a.width, height = _a.height;
+                var _b = [e.clientX, e.clientY], x = _b[0], y = _b[1];
+                var rect = bounds
+                    ? { top: top - bounds, left: left - bounds, width: width + bounds * 2, height: height + bounds * 2 }
+                    : { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+                setRotate([
+                    (-(clamp(0, rect.height, y - rect.top) - (rect.height / 2)) / rect.height) * tilt,
+                    ((clamp(0, rect.width, x - rect.left) - (rect.width / 2)) / rect.width) * tilt,
+                ]);
+            });
+        };
+        document.addEventListener('mousemove', handleMouseMove);
+        return function () { return document.removeEventListener('mousemove', handleMouseMove); };
+    }, []);
+    return rotate;
+};
+var Splash = react_1.memo(function (_a) {
+    var circles = _a.circles;
+    return viewBox = '0 0 500 430';
+    className = 'splash' >
+        { circles: circles, : .map(function (timestamp) { return key = { timestamp: timestamp } /  >
+            ; }
+            // <circle cx={50} cy={50} r={50} key={timestamp}/>
+            ) };
 });
-
-const HeartPath = () => (
-  <path d="M500 143.64C500 286.45 321.49 322.15 250.08 429.26C178.68 322.15 0.17 286.45 0.17 143.64C0.17 72.24 53.72 0.83 142.98 0.83C214.38 0.83 250.08 72.24 250.08 72.24C250.08 72.24 285.79 0.83 357.19 0.83C446.45 0.83 500 72.24 500 143.64Z"/>
-);
-
-const ShineSVG = ({x, opacity, rotate, translateZ}) => (
-  <svg viewBox="0 0 500 430" style={{transform: 'rotateX(${rotate.x}deg) rotateY(${rotate.y}deg) translateZ(${translateZ}px) scale(0.9)'}} className='heart-shine'>
-    <defs>
-      <clipPath id="heart">
-        <HeartPath/>
-      </clipPath>
-    </defs>
-    <rect x={500 - x * (700)} y='0' width='200' height='430' fill={`rgba(255,255,255,${opacity}`} clipPath='url(#heart)'/>
-  </svg>
-);
-
-const HeartSVG = ({rotate: {x, y}, translateZ, strokeDashoffset, scale = 1, className}) => (
-  <svg className={className} viewBox="0 0 500 430" style={{transform: `rotateX(${x}deg) rotateY(${y}deg) translateZ(${translateZ}px) scale(${scale})`, strokeDashoffset}}>
-    <HeartPath/>
-  </svg>
-);
-
-const Heart = () => {
-  const ref = useRef();
-  const [love, setLove] = useState(1);
-  const [pressed, setPressed] = useState(false);
-  const {timestamps, add} = useTimeArray(1000);
-  const [x,y] = useCursorTilt({ref, tilt: 50, bounds: 50});
-  const offset = (Math.atan2(y, x) / Math.PI) * (PATH_LENGTH / 2) + PATH_LENGTH / 2;
-  useDocumentEvent('mouseup', () => {
-    setPressed(pressed => {
-      if (pressed) {
-        setLove(a => {
-          if (a >= 1) {
-            return 0;
-          }
-          add();
-          return a + 0.3;
+/svg>;
+;
+;
+var HeartPath = function () { return d = "M500 143.64C500 286.45 321.49 322.15 250.08 429.26C178.68 322.15 0.17 286.45 0.17 143.64C0.17 72.24 53.72 0.83 142.98 0.83C214.38 0.83 250.08 72.24 250.08 72.24C250.08 72.24 285.79 0.83 357.19 0.83C446.45 0.83 500 72.24 500 143.64Z" /  >
+; };
+;
+var ShineSVG = function (_a) {
+    var x = _a.x, opacity = _a.opacity, rotate = _a.rotate, translateZ = _a.translateZ;
+    return viewBox = "0 0 500 430";
+}, style = {}, _a = void 0,  = _a.transform,  = _a["rotateX(${rotate.x}deg) rotateY(${rotate.y}deg) translateZ(${translateZ}px) scale(0.9)"];
+className = 'heart-shine' >
+    id;
+"heart" >
+    />
+    < /clipPath>
+    < /defs>
+    < rect;
+x = { 500: -x * (700) };
+y = '0';
+width = '200';
+height = '430';
+fill = {}(templateObject_1 || (templateObject_1 = __makeTemplateObject(["rgba(255,255,255,", ""], ["rgba(255,255,255,", ""])), opacity);
+clipPath = 'url(#heart)' /  >
+    /svg>;
+;
+var HeartSVG = function (_a) {
+    var _b = _a.rotate, x = _b.x, y = _b.y, translateZ = _a.translateZ, strokeDashoffset = _a.strokeDashoffset, _c = _a.scale, scale = _c === void 0 ? 1 : _c, className = _a.className;
+    return className = { className: className };
+}, viewBox = "0 0 500 430", style = {},  = (void 0).transform;
+"rotateX(" + x + "deg) rotateY(" + y + "deg) translateZ(" + translateZ + "px) scale(" + scale + ")", strokeDashoffset;
+ >
+    />
+    < /svg>;
+;
+var Heart = function () {
+    var ref = react_1.useRef();
+    var _a = react_1.useState(1), love = _a[0], setLove = _a[1];
+    var _b = react_1.useState(false), pressed = _b[0], setPressed = _b[1];
+    var _c = useTimeArray(1000), timestamps = _c.timestamps, add = _c.add;
+    var _d = useCursorTilt({ ref: ref, tilt: 50, bounds: 50 }), x = _d[0], y = _d[1];
+    var offset = (Math.atan2(y, x) / Math.PI) * (PATH_LENGTH / 2) + PATH_LENGTH / 2;
+    useDocumentEvent('mouseup', function () {
+        setPressed(function (pressed) {
+            if (pressed) {
+                setLove(function (a) {
+                    if (a >= 1) {
+                        return 0;
+                    }
+                    add();
+                    return a + 0.3;
+                });
+            }
+            return false;
         });
-      }
-      return false;
     });
-  });
-  
-  return (
-    <button className='heart' onMouseDown={() => setPressed(true)} ref={ref} style={{'--lightness': `${love * 80 + 20}%`, '--scale': 0.8 + love * 0.2 - pressed * 0.1}}>
-      <div className='inner-wrapper'>
-        <Splash circles={timestamps}/>
-        {[... new Array(LAYERS)].map((_, i) => (
-          <HeartSVG className='heart-layer' rotate={{x, y}} translateZ={i * LAYER_GAP} scale={Math.sin((i / LAYERS)*Math.PI)/10 + 1}/>
-        ))}
-        <HeartSVG className='heart-stroke' rotate={{x, y}} translateZ={(LAYERS + 1) * LAYER_GAP} strokeDashoffset={offset} scale={0.9}/>
-        <ShineSVG x={y / 50 + 0.5} opacity={x / 200 + 0.5} rotate={{x, y}} translateZ={(LAYERS + 1) * LAYER_GAP}/>
-        ME
-      </div>
-    </button>
-  );
+    return className = 'heart';
+    onMouseDown = {}();
 };
-
-const App = () => (
-  <div className='app'>
-    <Heart/>
-  </div>
-);
-
-ReactDOM.render(
-  <App/>,
-  document.body
-);
-
+setPressed(true);
+ref = { ref: ref };
+style = {};
+{
+    '--lightness';
+    love * 80 + 20 + "%", '--scale';
+    0.8 + love * 0.2 - pressed * 0.1;
+}
+ >
+    className;
+'inner-wrapper' >
+    circles;
+{
+    timestamps;
+}
+/>;
+{
+    __spreadArrays(new Array(LAYERS)).map(function (_, i) { return className = 'heart-layer'; }, rotate = {}, { x: x, y: y });
+}
+translateZ = { i: i };
+scale = { Math: Math, : .sin((i / LAYERS) * Math.PI) / 10 + 1 } /  >
+;
+className;
+'heart-stroke';
+rotate = {};
+{
+    x, y;
+}
+translateZ = {}(LAYERS + 1) * LAYER_GAP;
+strokeDashoffset = { offset: offset };
+scale = { 0.9:  } /  >
+    x;
+{
+    y / 50 + 0.5;
+}
+opacity = { x: x } / 200 + 0.5;
+rotate = {};
+{
+    x, y;
+}
+translateZ = {}(LAYERS + 1) * LAYER_GAP;
+/>;
+ME
+    < /div>
+    < /button>;
+;
+;
+var App = function () { return className = 'app' >
+    />
+    < /div>; };
+;
+react_dom_1.default.render(/>,, document.body);
+var templateObject_1;
+// https://codepen.io/ykadosh/pens/public
 
     </script>
+
 </html>
