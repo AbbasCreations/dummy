@@ -4,16 +4,13 @@
 (function ($) {
     "use strict";
       $('.sakura-falling').sakura();
-    $("#playmusic").trigger('click');
-
-    document.getElementById("my_audio").play();
 })(jQuery);
 
 
 
 $(document).on('click', function(){
 document.getElementById("my_audio").play();
-  //  console.log('Shaadi me zaroor aana');
+
 });
 
 // Set the date we're counting down to
