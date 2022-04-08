@@ -595,10 +595,19 @@ a {
 	display: flex;
 	font-size: 12px;
 	letter-spacing: 0pt;
-}@media (max-width:900px) {
+}
+@media (max-width:900px) {
 	img {
 		max-width: 40%;
 	}
 	.title{margin-top: 80px;margin-bottom: 0px;}
 	.title h1{font-size: 45px;margin: 15px auto;}
+}
+@media (max-width:575px) {
+	.title{margin-top: 80px;margin-bottom: 0px;}
+	.title h1{font-size: 35px;margin: 15px auto;}
+	.title h3 {font-size: 18px;}
+	.venue{padding: 8px;font-size: 12px;}
+	.title p{margin-bottom: 0px;}
+
 }
