@@ -9,7 +9,9 @@
 
 $( document ).ready(function() {
     $("#playmusic").trigger('click');
+setTimeout(function() { 
     document.getElementById("my_audio").play();
+} , 2000);
     });
 
 
