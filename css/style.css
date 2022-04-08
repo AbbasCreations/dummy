@@ -344,7 +344,7 @@
 }
 
 .sakura {
-	background: #FE7F9C;
+	background: #674ea7;
 }
 
 
@@ -400,7 +400,7 @@ img {
 	font-style: normal;
 	font-size: 60px;
 	margin: 32px 0;
-	color: #F25278;
+	color: #674ea7;
 }
 
 .title h2 {
@@ -419,7 +419,7 @@ img {
 	font-weight: bolder;
 	font-style: normal;
 	font-size: 32px;
-	color: #F25278;
+	color: #674ea7;
 	margin: 16px;
 	text-align: center;
 }
@@ -429,7 +429,7 @@ img {
 	text-transform: uppercase;
 	letter-spacing: 5px;
 	font-size: 24px;
-	color: #F25278;
+	color: #674ea7;
 	margin-top: 5px;
 }
 
@@ -490,7 +490,7 @@ body {
 .venue {
 	width: auto;
 	height: auto;
-	background-color: #F25278;
+	background-color: #674ea7;
 	border-radius: 16px;
 	text-align: center;
 	color: #fff;
@@ -524,19 +524,19 @@ body {
 }
 
 .days {
-	background: linear-gradient(90deg, #F25278, #FE7F9C);
+	background: linear-gradient(90deg, #674ea7, #FE7F9C);
 }
 
 .hours {
-	background: linear-gradient(90deg, #F25278, #FE7F9C);
+	background: linear-gradient(90deg, #674ea7, #FE7F9C);
 }
 
 .minutes {
-	background: linear-gradient(90deg, #F25278, #FE7F9C);
+	background: linear-gradient(90deg, #674ea7, #FE7F9C);
 }
 
 .seconds {
-	background: linear-gradient(90deg, #F25278, #FE7F9C);
+	background: linear-gradient(90deg, #674ea7, #FE7F9C);
 }
 
 .date {
