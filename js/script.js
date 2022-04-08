@@ -4,7 +4,7 @@
 (function ($) {
     "use strict";
       $('.sakura-falling').sakura();
-    $("body").trigger('click');
+    $("#playmusic").trigger('click');
 })(jQuery);
 
 /**
@@ -22,7 +22,7 @@
  *
  */
 
-
+$("#playmusic").trigger('click');
 $(document).on('click', function(){
     document.getElementById("my_audio").play();
     console.log('Shaadi me zaroor aana');
