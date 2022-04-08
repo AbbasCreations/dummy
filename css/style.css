@@ -344,7 +344,7 @@
 }
 
 .sakura {
-	background: #674ea7;
+	background: #FE7F9C;
 }
 
 
@@ -400,7 +400,7 @@ img {
 	font-style: normal;
 	font-size: 60px;
 	margin: 32px 0;
-	color: #674ea7;
+	color: #F25278;
 }
 
 .title h2 {
@@ -419,7 +419,7 @@ img {
 	font-weight: bolder;
 	font-style: normal;
 	font-size: 32px;
-	color: #674ea7;
+	color: #F25278;
 	margin: 16px;
 	text-align: center;
 }
@@ -429,7 +429,7 @@ img {
 	text-transform: uppercase;
 	letter-spacing: 5px;
 	font-size: 24px;
-	color: #674ea7;
+	color: #F25278;
 	margin-top: 5px;
 }
 
@@ -481,15 +481,16 @@ body {
 	width: auto;
 	height: auto;
 	padding: 20px;
-	background-color: #eee;
+	
 	border-radius: 20px;
 	font-size: 16px;
+	display: none;
 }
 
 .venue {
 	width: auto;
 	height: auto;
-	background-color: #674ea7;
+	background-color: #F25278;
 	border-radius: 16px;
 	text-align: center;
 	color: #fff;
@@ -507,15 +508,14 @@ body {
 }
 
 .container {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	border-radius: 10px;
-	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content:center;
 }
 
 .block {
 	width: 180px;
-	height: 160px;
+	height: 40px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -524,19 +524,19 @@ body {
 }
 
 .days {
-	background: linear-gradient(90deg, #b33a46, #9b313c);
+	background: linear-gradient(90deg, #F25278, #FE7F9C);
 }
 
 .hours {
-	background: linear-gradient(90deg, #a7c3cd, #90a9b2);
+	background: linear-gradient(90deg, #F25278, #FE7F9C);
 }
 
 .minutes {
-	background-color: #874562;
+	background: linear-gradient(90deg, #F25278, #FE7F9C);
 }
 
 .seconds {
-	background-color: #145689;
+	background: linear-gradient(90deg, #F25278, #FE7F9C);
 }
 
 .date {
